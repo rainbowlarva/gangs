@@ -25,6 +25,10 @@ body {
     color: white;
     margin-top: 20px;
   }
+
+  h3 {
+    color: white;
+  }
   
   form {
     display: flex;
