@@ -1,14 +1,5 @@
-/****************************************************
- * poi.js
- * Example: Person of Interest (POI) BBCode Generator
- ****************************************************/
-
-/**
- * The exact text from poi.txt as a multiline template.
- * We'll do replacements for NAMEHERE, plus handle the status color code,
- * plus user-specified image and MDC URL.
- */
-const poiTemplate = `[divbox=white]
+const poiTemplate = `
+[divbox=white]
 [center][u]DETECTIVE BUREAU - PERSON OF INTEREST[/u][/center]
 [hr][/hr]
 [center]
@@ -40,12 +31,10 @@ const poiTemplate = `[divbox=white]
 [list]
 [*] NAMEHERE
 [/list]
-[/divbox]`;
+[/divbox]
+`;
 
-/**
- * A configuration object to define custom placeholders
- * for each container ID.
- */
+// Custom placeholders for each dynamic list container:
 const placeholderConfig = {
   propertiesList: "Enter property address/name.",
   phonesList: "Enter phone number.",
@@ -54,71 +43,61 @@ const placeholderConfig = {
 };
 
 /**
- * If "alive" is checked, we output [b][color=#00BF00]ALIVE[/color][/b].
- * If "dead" is checked, we output [b][color=#FF0000]DECEASED[/color][/b].
- * If "unknown" is checked or none, we output [b]UNKNOWN[/b].
+ * Returns the BBCode snippet for subject's status (Alive/Deceased/Unknown).
  */
 function getStatusBBCode() {
-  const aliveCheck = document.getElementById('aliveCheck').checked;
-  const deadCheck = document.getElementById('deadCheck').checked;
-  const unknownCheck = document.getElementById('unknownCheck').checked;
+  const alive = document.getElementById('aliveCheck').checked;
+  const dead = document.getElementById('deadCheck').checked;
+  const unknown = document.getElementById('unknownCheck').checked;
 
-  if (aliveCheck) {
-    return `[b][color=#00BF00]ALIVE[/color][/b]`;
-  } else if (deadCheck) {
-    return `[b][color=#FF0000]DECEASED[/color][/b]`;
-  } else if (unknownCheck) {
-    return `[b]UNKNOWN[/b]`;
-  } else {
-    return `[b]UNKNOWN[/b]`;
-  }
+  if (alive) return `[b][color=#00BF00]ALIVE[/color][/b]`;
+  if (dead) return `[b][color=#FF0000]DECEASED[/color][/b]`;
+  if (unknown) return `[b]UNKNOWN[/b]`;
+  return `[b]UNKNOWN[/b]`;
 }
 
 /**
- * Uncheck other status checkboxes when one is selected.
+ * Ensures only one of Alive/Dead/Unknown can be checked at a time.
  */
 function handleStatusCheckboxes(event) {
-  const clickedId = event.target.id;
-  if (clickedId === 'aliveCheck') {
+  if (event.target.id === 'aliveCheck') {
     document.getElementById('deadCheck').checked = false;
     document.getElementById('unknownCheck').checked = false;
-  } else if (clickedId === 'deadCheck') {
+  } else if (event.target.id === 'deadCheck') {
     document.getElementById('aliveCheck').checked = false;
     document.getElementById('unknownCheck').checked = false;
-  } else if (clickedId === 'unknownCheck') {
+  } else if (event.target.id === 'unknownCheck') {
     document.getElementById('aliveCheck').checked = false;
     document.getElementById('deadCheck').checked = false;
   }
 }
 
 /**
- * Dynamically adds an item input to a specified list container,
- * using a custom placeholder from `placeholderConfig`.
+ * Adds an <input> to the specified container (for dynamic lists).
  */
 function addListItem(containerId) {
   const container = document.getElementById(containerId);
   const input = document.createElement('input');
   input.type = 'text';
   input.classList.add('list-input');
-
-  // Use the custom placeholder if defined; else fallback to "NAMEHERE"
+  // Use custom placeholder if defined:
   input.placeholder = placeholderConfig[containerId] || "NAMEHERE";
-
   container.appendChild(input);
 }
 
 /**
- * Removes the last item from a specified list container.
+ * Removes the last <input> from the specified container (if any).
  */
 function removeListItem(containerId) {
   const container = document.getElementById(containerId);
-  if (container.lastChild) {
+  // Just remove the last child if it exists:
+  if (container && container.lastChild) {
     container.removeChild(container.lastChild);
   }
 }
 
 /**
- * Gathers items from a list container and returns them as an array.
+ * Returns an array of trimmed input values from a container's .list-input fields.
  */
 function getListItems(containerId) {
   const container = document.getElementById(containerId);
@@ -126,134 +105,111 @@ function getListItems(containerId) {
   const items = [];
   inputs.forEach((input) => {
     const val = input.value.trim();
-    if (val) {
-      items.push(val);
-    }
+    if (val) items.push(val);
   });
   return items;
 }
 
 /**
- * Clears the entire form and the output.
+ * Clears the form, removes all dynamic inputs, and clears the BBCode output.
  */
 function clearForm() {
   document.getElementById('poiForm').reset();
-
-  // Remove dynamic inputs
-  ['propertiesList','phonesList','associatesList','casesList'].forEach(id => {
+  // Remove dynamic inputs from each container:
+  ['propertiesList','phonesList','associatesList','casesList'].forEach((id) => {
     document.getElementById(id).innerHTML = '';
   });
-
-  // Clear BBCode output
   document.getElementById('bbcodeText').textContent = '';
 }
 
 /**
- * Generates BBCode from the user's input, places it in #bbcodeText,
- * and auto-highlights the result.
+ * Generates BBCode, places it in #bbcodeText, and auto-highlights it.
  */
 function generateBBCode(event) {
   event.preventDefault(); // Prevent form submission
 
-  // Grab the new fields
-  const imageUrl = document.getElementById('imageUrl').value.trim() || 'https://i.imgur.com/RvO2yL5.png?1';
-  const mdcUrl = document.getElementById('mdcUrl').value.trim() || 'NAMEHERE';
-
-  // Grab other fields
-  const poiName = document.getElementById('poiName').value.trim() || 'NAMEHERE';
-  const race = document.getElementById('race').value.trim() || 'NAMEHERE';
-  const sex = document.getElementById('sex').value.trim() || 'NAMEHERE';
-  const age = document.getElementById('age').value.trim() || 'NAMEHERE';
+  // Gather normal fields
+  const poiName     = document.getElementById('poiName').value.trim()     || 'NAMEHERE';
+  const imageUrl    = document.getElementById('imageUrl').value.trim()    || 'https://i.imgur.com/RvO2yL5.png?1';
+  const mdcUrl      = document.getElementById('mdcUrl').value.trim()      || 'NAMEHERE';
+  const race        = document.getElementById('race').value.trim()        || 'NAMEHERE';
+  const sex         = document.getElementById('sex').value.trim()         || 'NAMEHERE';
+  const age         = document.getElementById('age').value.trim()         || 'NAMEHERE';
   const description = document.getElementById('description').value.trim() || 'NAMEHERE';
   const sanGangFile = document.getElementById('sanGangFile').value.trim() || 'NAMEHERE';
   const affiliation = document.getElementById('affiliation').value.trim() || 'NAMEHERE';
+
+  // Subject status
   const statusBB = getStatusBBCode();
 
-  // Lists
+  // Dynamic lists
   const properties = getListItems('propertiesList');
-  const phones = getListItems('phonesList');
+  const phones     = getListItems('phonesList');
   const associates = getListItems('associatesList');
-  const cases = getListItems('casesList');
+  const cases      = getListItems('casesList');
 
   // Make a copy of the template
   let finalText = poiTemplate;
 
-  // 1) Replace the default image with user input
+  // Insert user image + MDC link
   finalText = finalText.replace('https://i.imgur.com/RvO2yL5.png?1', imageUrl);
-
-  // 2) Replace the default [url=NAMEHERE]MDC[/url] with the user’s MDC link
   finalText = finalText.replace('[url=NAMEHERE]MDC[/url]', `[url=${mdcUrl}]MDC[/url]`);
 
-  // 3) Basic placeholders
+  // Basic placeholders
   finalText = finalText.replace('[b]NAME:[/b] NAMEHERE', `[b]NAME:[/b] ${poiName}`);
   finalText = finalText.replace('[b]RACE:[/b] NAMEHERE', `[b]RACE:[/b] ${race}`);
   finalText = finalText.replace('[b]SEX:[/b] NAMEHERE', `[b]SEX:[/b] ${sex}`);
   finalText = finalText.replace('[b]AGE:[/b] NAMEHERE', `[b]AGE:[/b] ${age}`);
   finalText = finalText.replace('[b]DESCRIPTION:[/b] NAMEHERE', `[b]DESCRIPTION:[/b] ${description}`);
-  finalText = finalText.replace('[b]SAN-GANG File:[/b] [url=NAMEHERE]ACCESS[/url]', 
-    `[b]SAN-GANG File:[/b] [url=${sanGangFile}]ACCESS[/url]`);
+  finalText = finalText.replace(
+    '[b]SAN-GANG File:[/b] [url=NAMEHERE]ACCESS[/url]',
+    `[b]SAN-GANG File:[/b] [url=${sanGangFile}]ACCESS[/url]`
+  );
   finalText = finalText.replace('[b]Affiliation:[/b] NAMEHERE', `[b]Affiliation:[/b] ${affiliation}`);
 
-  // 4) Status line
+  // Status
   finalText = finalText.replace(
     '[b]Status:[/b] [b][color=#00BF00]ALIVE[/color][/b]/[b][color=#FF0000]DECEASED[/color][/b]/[b]UNKNOWN[/b]',
     `[b]Status:[/b] ${statusBB}`
   );
 
-  // 5) Known Properties
+  // Known Properties
   if (properties.length > 0) {
     const lines = properties.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n${lines}\n[/list]`);
-  } else {
-    finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n[*] NAMEHERE\n[/list]`);
   }
 
-  // 6) Known Phone Numbers
+  // Known Phone Numbers
   if (phones.length > 0) {
     const lines = phones.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
       '[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Phone Numbers:[/b]\n[list]\n${lines}\n[/list]`
     );
-  } else {
-    finalText = finalText.replace(
-      '[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
-      `[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]`
-    );
   }
 
-  // 7) Known Associates
+  // Known Associates
   if (associates.length > 0) {
     const lines = associates.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
       '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Associates[/b]:\n[list]\n${lines}\n[/list]`
     );
-  } else {
-    finalText = finalText.replace(
-      '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
-      `[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]`
-    );
   }
 
-  // 8) Related IR/CASEFILES
+  // Related IR/Casefiles
   if (cases.length > 0) {
     const lines = cases.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
       '[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Related IR/CASEFILES[/b]:\n[list]\n${lines}\n[/list]`
     );
-  } else {
-    finalText = finalText.replace(
-      '[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
-      `[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]`
-    );
   }
 
-  // Place the final text in #bbcodeText
+  // Place final text in #bbcodeText
   document.getElementById('bbcodeText').textContent = finalText;
 
-  // Auto-highlight the generated BBCode
+  // Auto-highlight
   const codeElement = document.getElementById('bbcodeText');
   const range = document.createRange();
   range.selectNodeContents(codeElement);
@@ -262,15 +218,15 @@ function generateBBCode(event) {
   selection.addRange(range);
 }
 
+// On DOMContentLoaded, wire up everything
 document.addEventListener('DOMContentLoaded', () => {
-  // Listen for form submission
-  const poiForm = document.getElementById('poiForm');
-  poiForm.addEventListener('submit', generateBBCode);
+  // Generate button
+  document.getElementById('poiForm').addEventListener('submit', generateBBCode);
 
-  // Listen for Clear button
+  // Clear button
   document.getElementById('clearButton').addEventListener('click', clearForm);
 
-  // Status checkboxes
+  // Alive/Dead/Unknown checkboxes
   document.getElementById('aliveCheck').addEventListener('change', handleStatusCheckboxes);
   document.getElementById('deadCheck').addEventListener('change', handleStatusCheckboxes);
   document.getElementById('unknownCheck').addEventListener('change', handleStatusCheckboxes);
@@ -283,8 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('removePhone').addEventListener('click', () => removeListItem('phonesList'));
 
   document.getElementById('addAssociate').addEventListener('click', () => addListItem('associatesList'));
-  document.getElementById('removeAssociate').addEventListener('click', removeListItem('associatesList'));
+  document.getElementById('removeAssociate').addEventListener('click', () => removeListItem('associatesList'));
 
   document.getElementById('addCase').addEventListener('click', () => addListItem('casesList'));
-  document.getElementById('removeCase').addEventListener('click', removeListItem('casesList'));
+  document.getElementById('removeCase').addEventListener('click', () => removeListItem('casesList'));
 });
