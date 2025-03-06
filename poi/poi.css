@@ -18,11 +18,11 @@ body {
   
   h1 {
     text-align: center;
-    color: #B9AA85;
+    color: white;
   }
   
   h2 {
-    color: #B9AA85;
+    color: white;
     margin-top: 20px;
   }
   
@@ -152,3 +152,12 @@ body {
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
+  .back-button {
+    position: absolute;
+    top: 10px; /* Adjust for the distance from the top */
+    left: 10px; /* Adjust for the distance from the left */
+    width: 50px; /* Adjust the size of the image */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+}
