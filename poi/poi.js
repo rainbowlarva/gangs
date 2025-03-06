@@ -1,3 +1,13 @@
+/****************************************************
+ * poi.js
+ * Example: Person of Interest (POI) BBCode Generator
+ ****************************************************/
+
+/**
+ * The exact text from poi.txt as a multiline template.
+ * We'll do replacements for NAMEHERE, plus handle the status color code,
+ * plus user-specified image and MDC URL.
+ */
 const poiTemplate = `[divbox=white]
 [center][u]DETECTIVE BUREAU - PERSON OF INTEREST[/u][/center]
 [hr][/hr]
@@ -31,6 +41,17 @@ const poiTemplate = `[divbox=white]
 [*] NAMEHERE
 [/list]
 [/divbox]`;
+
+/**
+ * A configuration object to define custom placeholders
+ * for each container ID.
+ */
+const placeholderConfig = {
+  propertiesList: "Enter property address/name.",
+  phonesList: "Enter phone number.",
+  associatesList: "Enter associate's name/alias.",
+  casesList: "Enter IR or casefile number."
+};
 
 /**
  * If "alive" is checked, we output [b][color=#00BF00]ALIVE[/color][/b].
@@ -71,14 +92,18 @@ function handleStatusCheckboxes(event) {
 }
 
 /**
- * Dynamically adds an item input to a specified list container.
+ * Dynamically adds an item input to a specified list container,
+ * using a custom placeholder from `placeholderConfig`.
  */
 function addListItem(containerId) {
   const container = document.getElementById(containerId);
   const input = document.createElement('input');
   input.type = 'text';
   input.classList.add('list-input');
-  input.placeholder = 'NAMEHERE';
+
+  // Use the custom placeholder if defined; else fallback to "NAMEHERE"
+  input.placeholder = placeholderConfig[containerId] || "NAMEHERE";
+
   container.appendChild(input);
 }
 
