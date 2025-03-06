@@ -1,11 +1,5 @@
-/****************************************************
- * poi.js
- * Example: Person of Interest BBCode Generator
- ****************************************************/
-
 /**
  * The exact text from poi.txt as a multiline template.
- * We’ll do replacements for NAMEHERE, plus handle the status color code.
  */
 const poiTemplate = `[divbox=white]
 [center][u]DETECTIVE BUREAU - PERSON OF INTEREST[/u][/center]
@@ -42,9 +36,9 @@ const poiTemplate = `[divbox=white]
 [/divbox]`;
 
 /**
- * If "alive" is checked, we output [b][color=#00BF00]ALIVE[/color][/b].
- * If "dead" is checked, we output [b][color=#FF0000]DECEASED[/color][/b].
- * If neither or unknown is checked, we output [b]UNKNOWN[/b].
+ * If "alive" is checked, output [b][color=#00BF00]ALIVE[/color][/b].
+ * If "dead" is checked, output [b][color=#FF0000]DECEASED[/color][/b].
+ * If "unknown" is checked or none, output [b]UNKNOWN[/b].
  */
 function getStatusBBCode() {
   const aliveCheck = document.getElementById('aliveCheck').checked;
@@ -58,7 +52,6 @@ function getStatusBBCode() {
   } else if (unknownCheck) {
     return `[b]UNKNOWN[/b]`;
   } else {
-    // If none selected, default to [b]UNKNOWN[/b]
     return `[b]UNKNOWN[/b]`;
   }
 }
@@ -134,7 +127,8 @@ function clearForm() {
 }
 
 /**
- * Generates BBCode from the user's input, places it in #bbcodeText.
+ * Generates BBCode from the user's input, places it in #bbcodeText,
+ * and auto-highlights the result.
  */
 function generateBBCode(event) {
   event.preventDefault(); // Prevent form submission
@@ -159,76 +153,82 @@ function generateBBCode(event) {
   let finalText = poiTemplate;
 
   // Replace placeholders carefully
-  // 1) [url=NAMEHERE]MDC[/url] => user might put their own link
   finalText = finalText.replace('[url=NAMEHERE]MDC[/url]', `[url=${poiName}]MDC[/url]`);
-
-  // 2) [b]NAME:[/b] NAMEHERE => replaced with actual name
   finalText = finalText.replace('[b]NAME:[/b] NAMEHERE', `[b]NAME:[/b] ${poiName}`);
   finalText = finalText.replace('[b]RACE:[/b] NAMEHERE', `[b]RACE:[/b] ${race}`);
   finalText = finalText.replace('[b]SEX:[/b] NAMEHERE', `[b]SEX:[/b] ${sex}`);
   finalText = finalText.replace('[b]AGE:[/b] NAMEHERE', `[b]AGE:[/b] ${age}`);
   finalText = finalText.replace('[b]DESCRIPTION:[/b] NAMEHERE', `[b]DESCRIPTION:[/b] ${description}`);
-
-  // 3) SAN-GANG
   finalText = finalText.replace('[b]SAN-GANG File:[/b] [url=NAMEHERE]ACCESS[/url]', 
     `[b]SAN-GANG File:[/b] [url=${sanGangFile}]ACCESS[/url]`);
-
-  // 4) Affiliation
   finalText = finalText.replace('[b]Affiliation:[/b] NAMEHERE', `[b]Affiliation:[/b] ${affiliation}`);
 
-  // 5) Status => replace the entire line with the chosen color code
+  // Status line
   finalText = finalText.replace(
     '[b]Status:[/b] [b][color=#00BF00]ALIVE[/color][/b]/[b][color=#FF0000]DECEASED[/color][/b]/[b]UNKNOWN[/b]',
     `[b]Status:[/b] ${statusBB}`
   );
 
-  // 6) Known Properties
+  // Known Properties
   if (properties.length > 0) {
     const lines = properties.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n${lines}\n[/list]`);
   } else {
-    // If none, keep the placeholder
     finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n[*] NAMEHERE\n[/list]`);
   }
 
-  // 7) Known Phone Numbers
+  // Known Phone Numbers
   if (phones.length > 0) {
     const lines = phones.map(item => `[*] ${item}`).join('\n');
-    finalText = finalText.replace('[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]', 
+    finalText = finalText.replace(
+      '[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Phone Numbers:[/b]\n[list]\n${lines}\n[/list]`
     );
   } else {
-    finalText = finalText.replace('[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
+    finalText = finalText.replace(
+      '[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]`
     );
   }
 
-  // 8) Known Associates
+  // Known Associates
   if (associates.length > 0) {
     const lines = associates.map(item => `[*] ${item}`).join('\n');
-    finalText = finalText.replace('[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]', 
+    finalText = finalText.replace(
+      '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Associates[/b]:\n[list]\n${lines}\n[/list]`
     );
   } else {
-    finalText = finalText.replace('[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
+    finalText = finalText.replace(
+      '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]`
     );
   }
 
-  // 9) Related IR/CASEFILES
+  // Related IR/CASEFILES
   if (cases.length > 0) {
     const lines = cases.map(item => `[*] ${item}`).join('\n');
-    finalText = finalText.replace('[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
+    finalText = finalText.replace(
+      '[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Related IR/CASEFILES[/b]:\n[list]\n${lines}\n[/list]`
     );
   } else {
-    finalText = finalText.replace('[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
+    finalText = finalText.replace(
+      '[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]`
     );
   }
 
-  // Display final BBCode
+  // Place the final text in #bbcodeText
   document.getElementById('bbcodeText').textContent = finalText;
+
+  // Auto-highlight the generated BBCode
+  const codeElement = document.getElementById('bbcodeText');
+  const range = document.createRange();
+  range.selectNodeContents(codeElement);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -252,8 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('removePhone').addEventListener('click', () => removeListItem('phonesList'));
 
   document.getElementById('addAssociate').addEventListener('click', () => addListItem('associatesList'));
-  document.getElementById('removeAssociate').addEventListener('click', () => removeListItem('associatesList'));
+  document.getElementById('removeAssociate').addEventListener('click', removeListItem('associatesList'));
 
   document.getElementById('addCase').addEventListener('click', () => addListItem('casesList'));
-  document.getElementById('removeCase').addEventListener('click', () => removeListItem('casesList'));
+  document.getElementById('removeCase').addEventListener('click', removeListItem('casesList'));
 });
