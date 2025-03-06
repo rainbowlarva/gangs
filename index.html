@@ -2,109 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Person of Interest</title>
-  <link rel="stylesheet" href="poi.css" />
+  <title>GIT Generators</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS Style Sheet -->
+  <link rel="stylesheet" href="gangs.css" />
 </head>
 <body class="background">
-  <a href="https://rainbowlarva.github.io/GTAW-Generators/">
-    <img src="arrow.png" alt="Back" class="back-button">
-</a>
-  <div class="container">
-    <h1>Person of Interest Report</h1>
+  <!-- Top Logo -->
+  <img src="git.png" class="gitlogo" />
 
-    <form id="poiForm">
-      <!-- Basic Fields -->
-      <div>
-        <label for="poiName">Name:</label>
-        <input type="text" id="poiName" placeholder="Subject name." />
-      </div>
-      <div>
-        <label for="imageUrl">Image:</label>
-        <input type="text" id="imageUrl" placeholder="Subject photo." />
-      </div>
-      <div>
-        <label for="mdcUrl">MDC Page:</label>
-        <input type="text" id="mdcUrl" placeholder="Link to subject MDC profile." />
-      </div>
-      <div>
-        <label for="race">Race:</label>
-        <input type="text" id="race" placeholder="Subject's race." />
-      </div>
-      <div>
-        <label for="sex">Sex:</label>
-        <input type="text" id="sex" placeholder="Subject's gender." />
-      </div>
-      <div>
-        <label for="age">Age:</label>
-        <input type="text" id="age" placeholder="Subject's age." />
-      </div>
-      <div>
-        <label for="description">Description:</label>
-        <textarea id="description" rows="2" placeholder="Subject's description."></textarea>
-      </div>
-      <div>
-        <label for="sanGangFile">SanGang File:</label>
-        <input type="text" id="sanGangFile" placeholder="Link to subject SanGang file." />
-      </div>
-      <div>
-        <label for="affiliation">Affiliation:</label>
-        <input type="text" id="affiliation" placeholder="Subject's affiliation." />
-      </div>
-
-      <!-- Status (Three Checkboxes) -->
-      <h2>Status</h2>
-      <div class="checkbox-container status-checks">
-        <input type="checkbox" id="aliveCheck" />
-        <label for="aliveCheck">Alive</label>
-
-        <input type="checkbox" id="deadCheck" />
-        <label for="deadCheck">Deceased</label>
-
-        <input type="checkbox" id="unknownCheck" />
-        <label for="unknownCheck">Unknown</label>
-      </div>
-
-      <!-- Dynamic Lists -->
-      <h2>Known Properties</h2>
-      <div id="propertiesList" class="list-container"></div>
-      <div class="button-row">
-        <button type="button" id="addProperty">Add Property</button>
-        <button type="button" id="removeProperty">Remove Property</button>
-      </div>
-
-      <h2>Known Phone Numbers</h2>
-      <div id="phonesList" class="list-container"></div>
-      <div class="button-row">
-        <button type="button" id="addPhone">Add Phone</button>
-        <button type="button" id="removePhone">Remove Phone</button>
-      </div>
-
-      <h2>Known Associates</h2>
-      <div id="associatesList" class="list-container"></div>
-      <div class="button-row">
-        <button type="button" id="addAssociate">Add Associate</button>
-        <button type="button" id="removeAssociate">Remove Associate</button>
-      </div>
-
-      <h2>Related IR/Casefiles</h2>
-      <div id="casesList" class="list-container"></div>
-      <div class="button-row">
-        <button type="button" id="addCase">Add Casefile</button>
-        <button type="button" id="removeCase">Remove Casefile</button>
-      </div>
-
-      <!-- Generate & Clear Buttons -->
-      <button type="button" id="clearButton" class="clear-button">Clear</button>
-      <button type="submit">Generate BBCode</button>
-    </form>
-
-    <!-- Output Area -->
-    <div id="bbcodeOutput">
-      <h2>Generated BBCode:</h2>
-      <pre id="bbcodeText"></pre>
+  <div class="prdcontainer">
+  <h1>GANG IMPACT TEAM</h1>
+    <div class="git-container">
+      <a href="poi/poi.html" class="image-button">
+        <img src="thumbnails/person-of-interest.png" alt="poi">
+        <p>Person of Interest</p>
+      </a>
+      <a href="boi.html" class="image-button">
+        <img src="thumbnails/property-of-interest.png" alt="poi2">
+        <p>Property of Interest</p>
+      </a>
+      <a href="fic.html" class="image-button">
+        <img src="thumbnails/field-interview-card.png" alt="fic">
+        <p>Field Interview Card</p>
+      </a>
+      <a href="ged-wva-ir.html" class="image-button">
+        <img src="thumbnails/ged-wva-ir.png" alt="wva">
+        <p>West Vinewood Area Incident Report</p>
+      </a>
+      <a href="ged-sca-ir.html" class="image-button">
+        <img src="thumbnails/ged-sca-ir.png" alt="scr">
+        <p>South Central Area Incident Report</p>
+      </a>
     </div>
-  </div>
-
-  <script src="poi.js"></script>
+  </div> <!-- end prdcontainer -->
 </body>
 </html>
