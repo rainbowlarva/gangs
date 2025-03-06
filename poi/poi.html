@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>POI BBCode Generator</title>
+  <title>POI Generator</title>
   <link rel="stylesheet" href="poi.css" />
 </head>
 <body class="background">
@@ -14,6 +14,14 @@
       <div>
         <label for="poiName">Name:</label>
         <input type="text" id="poiName" placeholder="NAMEHERE" />
+      </div>
+      <div>
+        <label for="imageUrl">POI Image URL:</label>
+        <input type="text" id="imageUrl" placeholder="https://i.imgur.com/RvO2yL5.png?1" />
+      </div>
+      <div>
+        <label for="mdcUrl">MDC URL:</label>
+        <input type="text" id="mdcUrl" placeholder="NAMEHERE" />
       </div>
       <div>
         <label for="race">Race:</label>
@@ -43,7 +51,6 @@
       <!-- Status (Three Checkboxes), EXACT FI-CARD STYLE -->
       <h2>Status</h2>
       <div class="checkbox-container status-checks">
-        <!-- Hide the checkbox in CSS, style the label with teal color and scaling -->
         <input type="checkbox" id="aliveCheck" />
         <label for="aliveCheck">Alive</label>
 
