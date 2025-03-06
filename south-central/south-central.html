@@ -7,18 +7,21 @@
 </head>
 <body>
   <div class="container">
+    <!-- Optional Back Button -->
     <a href="https://rainbowlarva.github.io/gangs/">
-        <img src="../arrow.png" alt="Back" class="back-button">
+      <img src="../arrow.png" alt="Back" class="back-button">
     </a>
+
     <h1>South Central Area Incident Report</h1>
+
     <form id="scrForm">
-      <!-- Gangs Involved -->
+      <!-- 1) Gangs Involved -->
       <div>
         <label for="gangsInvolved">Gang(s) Involved:</label>
         <input type="text" id="gangsInvolved" placeholder="e.g. Rollin' 60's Neighborhood Crips, etc." />
       </div>
 
-      <!-- Supplementary IR Link & Title -->
+      <!-- 2) Supplementary IR Link & Title -->
       <div>
         <label for="suppUrl">Supplementary IR URL:</label>
         <input type="text" id="suppUrl" placeholder="Full link if IR is supplementary" />
@@ -28,37 +31,47 @@
         <input type="text" id="suppIrTitle" placeholder="#XXX" />
       </div>
 
-      <!-- Spoiler Title -->
+      <!-- 3) Spoiler Title -->
       <div>
         <label for="spoilerTitle">Spoiler Title (e.g. IR #1234):</label>
         <input type="text" id="spoilerTitle" placeholder="#XXX" />
       </div>
 
-      <!-- Time and Date -->
+      <!-- 4) Time and Date -->
       <div>
         <label for="timeDate">Time & Date:</label>
         <input type="text" id="timeDate" placeholder="e.g. 01/JAN/2025 15:00" />
       </div>
 
-      <!-- Location -->
+      <!-- 5) Location -->
       <div>
         <label for="location">Location:</label>
         <input type="text" id="location" placeholder="Where the incident took place" />
       </div>
 
-      <!-- Narrative -->
+      <!-- 6) Employee Name and Department Rank -->
+      <div>
+        <label for="employeeName">Employee Full Name:</label>
+        <input type="text" id="employeeName" placeholder="Your full name" />
+      </div>
+      <div>
+        <label for="departmentRank">Departmental Rank:</label>
+        <input type="text" id="departmentRank" placeholder="Your rank (e.g. Officer II)" />
+      </div>
+
+      <!-- 7) Narrative -->
       <div>
         <label for="narrative">Narrative:</label>
         <textarea id="narrative" rows="4" placeholder="Describe what happened..."></textarea>
       </div>
 
-      <!-- Attachments -->
+      <!-- 8) Attachments -->
       <div>
         <label for="attachments">Attachments:</label>
         <textarea id="attachments" rows="2" placeholder="Any extra references or evidence"></textarea>
       </div>
 
-      <!-- Employee Signature -->
+      <!-- 9) Employee Signature -->
       <div>
         <label for="employeeSig">Employee Signature:</label>
         <input type="text" id="employeeSig" placeholder="Your signature or name" />
