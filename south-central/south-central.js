@@ -1,18 +1,26 @@
 /****************************************************
- * scr.js
- * SCR Area Notes Generator
+ * south-central.js
+ * South Central Area Incident Report Generator
  ****************************************************/
 
 /**
- * The exact text from west-valley.txt, but with “WVA” replaced by “SCR.”
+ * The exact text from south-central.txt as a multiline template.
+ * Notice the placeholders are:
+ * - "Answer here" for GANG(S) INVOLVED
+ * - "linkhere" and "###" in the IR link
+ * - "XXX" in the altspoiler2=...
+ * - "TIME AND DATE[/b]: " and "LOCATION[/b]: " are empty lines we fill
+ * - "Full Incident / Intelligence narrative here â€¦"
+ * - "Attachments, if any."
+ * - Employee signature lines are also empty
  */
-const scrTemplate = `[b]GANG(S) INVOLVED:[/b] [i]NAMEHERE[/i]
+const scTemplate = `[b]GANG(S) INVOLVED:[/b] [i]Answer here[/i]
 
-[b]SUPPLEMENTARY TO?:[/b] [url=NAMEHERE]GEDSCA IR: NAMEHERE[/url]
+[b]SUPPLEMENTARY TO?:[/b] [url=linkhere]GEDSCA IR: ###[/url]
 [color=transparent](Provide precise post link if your IR is supplementary to a previous IR submission.)[/color]
 
 
-[altspoiler2=GEDSCA IR: NAMEHERE]
+[altspoiler2=GEDSCA IR: XXX]
 [divbox=white][aligntable=left,721,0,0,0,0,0][img]https://i.imgur.com/5m4NeKz.png[/img][/aligntable]
 [aligntable=left,721,0,0,0,0,0][divbox=black][b][color=#FFFFFF]AREA INCIDENT REPORT[/color][/b][/divbox][/aligntable]
 [aligntable=left,360,0,0,0,0,0][divbox=white]
@@ -20,13 +28,13 @@ const scrTemplate = `[b]GANG(S) INVOLVED:[/b] [i]NAMEHERE[/i]
 [b]DEPARTMENTAL RANK:[/b] 
 
 [/divbox][/aligntable][aligntable=left,360,1,0,0,0,0][divbox=white]
-[b]TIME AND DATE[/b]: NAMEHERE
-[b]LOCATION[/b]: NAMEHERE
+[b]TIME AND DATE[/b]: 
+[b]LOCATION[/b]: 
 [/divbox][/aligntable]
 
 [aligntable=left,721,0,0,0,0,0][divbox=black][b][color=#FFFFFF]NARRATIVE[/color][/b][/divbox][/aligntable][aligntable=left,721,0,0,0,0,0][divbox=white]
 
-NAMEHERE
+Full Incident / Intelligence narrative here â€¦
 
 
 
@@ -34,14 +42,14 @@ NAMEHERE
 [/divbox][/aligntable]
 [aligntable=left,721,0,0,0,0,0][divbox=black][b][color=#FFFFFF]ATTACHMENTS[/color][/b][/divbox][/aligntable][aligntable=left,721,0,0,0,0,0][divbox=white]
 
-NAMEHERE
+Attachments, if any.
 
 
 
 
 [/divbox][/aligntable]
 [aligntable=left,721,0,0,0,0,0][divbox=white][b]EMPLOYEE SIGNATURE:[/b]
-NAMEHERE
+
 
 [/divbox][/aligntable]
 
@@ -57,57 +65,58 @@ function clearForm() {
 }
 
 /**
- * Generate BBCode from scrTemplate, replacing each NAMEHERE with user input.
+ * Generate BBCode from scTemplate, replacing each placeholder with user input.
  */
 function generateBBCode(e) {
   e.preventDefault();
 
-  // Gather user inputs
-  const gangsInvolved = document.getElementById('gangsInvolved').value.trim() || 'NAMEHERE';
-  const suppUrl       = document.getElementById('suppUrl').value.trim()      || 'NAMEHERE';
-  const suppIrTitle   = document.getElementById('suppIrTitle').value.trim()  || 'NAMEHERE';
-  const spoilerTitle  = document.getElementById('spoilerTitle').value.trim() || 'NAMEHERE';
-  const timeDate      = document.getElementById('timeDate').value.trim()     || 'NAMEHERE';
-  const location      = document.getElementById('location').value.trim()     || 'NAMEHERE';
-  const narrative     = document.getElementById('narrative').value.trim()    || 'NAMEHERE';
-  const attachments   = document.getElementById('attachments').value.trim()  || 'NAMEHERE';
-  const employeeSig   = document.getElementById('employeeSig').value.trim()  || 'NAMEHERE';
+  // Gather user inputs from the form
+  const gangsInvolved = document.getElementById('gangsInvolved').value.trim() || 'N/A';
+  const suppUrl       = document.getElementById('suppUrl').value.trim()      || 'linkhere';
+  const suppIrTitle   = document.getElementById('suppIrTitle').value.trim()  || '###';
+  const spoilerTitle  = document.getElementById('spoilerTitle').value.trim() || 'XXX';
+  const timeDate      = document.getElementById('timeDate').value.trim()     || 'N/A';
+  const location      = document.getElementById('location').value.trim()     || 'N/A';
+  const narrative     = document.getElementById('narrative').value.trim()    || 'No narrative provided.';
+  const attachments   = document.getElementById('attachments').value.trim()  || 'None.';
+  const employeeSig   = document.getElementById('employeeSig').value.trim()  || 'Unsigned';
 
   // Make a copy of the template
-  let finalText = scrTemplate;
+  let finalText = scTemplate;
 
-  // 1) GANG(S) INVOLVED => [i]NAMEHERE[/i]
-  finalText = finalText.replace('[i]NAMEHERE[/i]', `[i]${gangsInvolved}[/i]`);
+  // 1) GANG(S) INVOLVED => "Answer here"
+  finalText = finalText.replace('Answer here', gangsInvolved);
 
-  // 2) SUPPLEMENTARY => [url=NAMEHERE]GEDSCR IR: NAMEHERE[/url]
-  finalText = finalText.replace('[url=NAMEHERE]GEDSCA IR: NAMEHERE[/url]',
-    `[url=${suppUrl}]GEDSCR IR: ${suppIrTitle}[/url]`
-  );
+  // 2) SUPPLEMENTARY => [url=linkhere]GEDSCA IR: ###[/url]
+  // We have two placeholders in the same line: "linkhere" and "###"
+  finalText = finalText.replace('linkhere', suppUrl);
+  finalText = finalText.replace('###', suppIrTitle);
 
-  // 3) altspoiler2=GEDSCR IR: NAMEHERE => altspoiler2=GEDSCR IR: spoilerTitle
-  finalText = finalText.replace('altspoiler2=GEDSCR IR: NAMEHERE',
+  // 3) altspoiler2=GEDSCA IR: XXX => altspoiler2=GEDSCA IR: spoilerTitle
+  finalText = finalText.replace('altspoiler2=GEDSCA IR: XXX',
     `altspoiler2=GEDSCA IR: ${spoilerTitle}`);
 
-  // 4) TIME AND DATE => "NAMEHERE"
-  finalText = finalText.replace('[b]TIME AND DATE[/b]: NAMEHERE',
-    `[b]TIME AND DATE[/b]: ${timeDate}`);
+  // 4) TIME AND DATE => blank after [b]TIME AND DATE[/b]:
+  finalText = finalText.replace('[b]TIME AND DATE[/b]: \n[b]LOCATION[/b]:',
+    `[b]TIME AND DATE[/b]: ${timeDate}\n[b]LOCATION[/b]:`);
 
-  // 5) LOCATION => "NAMEHERE"
-  finalText = finalText.replace('[b]LOCATION[/b]: NAMEHERE',
-    `[b]LOCATION[/b]: ${location}`);
+  // 5) LOCATION => blank after [b]LOCATION[/b]:
+  finalText = finalText.replace('[b]LOCATION[/b]: \n[/divbox]',
+    `[b]LOCATION[/b]: ${location}\n[/divbox]`);
 
-  // 6) NARRATIVE => "NAMEHERE" with extra newlines
-  finalText = finalText.replace('\nNAMEHERE\n\n', `\n${narrative}\n\n`);
+  // 6) NARRATIVE => "Full Incident / Intelligence narrative here â€¦"
+  finalText = finalText.replace('Full Incident / Intelligence narrative here â€¦',
+    narrative);
 
-  // 7) ATTACHMENTS => "NAMEHERE" with extra newlines
-  finalText = finalText.replace('\nNAMEHERE\n\n[/divbox][/aligntable]',
-    `\n${attachments}\n\n[/divbox][/aligntable]`);
+  // 7) ATTACHMENTS => "Attachments, if any."
+  finalText = finalText.replace('Attachments, if any.', attachments);
 
-  // 8) EMPLOYEE SIGNATURE => final "NAMEHERE\n\n"
-  finalText = finalText.replace('NAMEHERE\n\n[/divbox][/aligntable]',
-    `${employeeSig}\n\n[/divbox][/aligntable]`);
+  // 8) EMPLOYEE SIGNATURE => after [b]EMPLOYEE SIGNATURE:[/b]
+  // There's a blank line, we can insert the signature there
+  finalText = finalText.replace('[b]EMPLOYEE SIGNATURE:[/b]\n\n',
+    `[b]EMPLOYEE SIGNATURE:[/b]\n${employeeSig}\n\n`);
 
-  // Place final text
+  // Place final text in #bbcodeText
   document.getElementById('bbcodeText').textContent = finalText;
 
   // Auto-highlight
@@ -123,9 +132,9 @@ function generateBBCode(e) {
  * Wire up event listeners on DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // Submit => generate
+  // On submit => generate
   document.getElementById('scrForm').addEventListener('submit', generateBBCode);
 
-  // Clear
+  // On Clear => reset
   document.getElementById('clearButton').addEventListener('click', clearForm);
 });
