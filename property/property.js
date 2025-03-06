@@ -51,13 +51,13 @@ function buildPropertyTypeBBCode() {
   const otherChecked     = document.getElementById('otherCheck').checked;
   const otherValue       = document.getElementById('otherType').value.trim();
 
-  const businessLine  = businessChecked  ? `[cbx] Business`  : `[cb] Business`;
-  const residenceLine = residenceChecked ? `[cbx] Residence` : `[cb] Residence`;
-  const storageLine   = storageChecked   ? `[cbx] Storage`   : `[cb] Storage`;
+  const businessLine  = businessChecked  ? `[cbc] Business`  : `[cb] Business`;
+  const residenceLine = residenceChecked ? `[cbc] Residence` : `[cb] Residence`;
+  const storageLine   = storageChecked   ? `[cbc] Storage`   : `[cb] Storage`;
 
   // If “Other” is checked => [cbx] Other: userValue, else => [cb] Other:
   const otherLine = otherChecked
-    ? `[cbx] Other: ${otherValue || 'N/A'}`
+    ? `[cbc] Other: ${otherValue || 'N/A'}`
     : `[cb] Other: `;
 
   return [
