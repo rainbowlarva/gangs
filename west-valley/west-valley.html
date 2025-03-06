@@ -7,10 +7,13 @@
 </head>
 <body>
   <div class="container">
+    <!-- Optional back button -->
     <a href="https://rainbowlarva.github.io/gangs/">
-        <img src="../arrow.png" alt="Back" class="back-button">
+      <img src="../arrow.png" alt="Back" class="back-button">
     </a>
+
     <h1>West Valley Area Incident Report</h1>
+
     <form id="westValleyForm">
       <!-- 1) Gangs Involved -->
       <div>
@@ -31,7 +34,7 @@
       <!-- 3) Spoiler Title -->
       <div>
         <label for="spoilerTitle">Report Number:</label>
-        <input type="text" id="spoilerTitle" placeholder="#XXX" />
+        <input type="text" id="spoilerTitle" placeholder="What report number is this?" />
       </div>
 
       <!-- 4) Time and Date -->
@@ -46,19 +49,29 @@
         <input type="text" id="location" placeholder="Where the incident took place" />
       </div>
 
-      <!-- 6) Narrative -->
+      <!-- 6) Employee Name & Rank -->
+      <div>
+        <label for="employeeName">Employee Full Name:</label>
+        <input type="text" id="employeeName" placeholder="Your name" />
+      </div>
+      <div>
+        <label for="employeeRank">Departmental Rank:</label>
+        <input type="text" id="employeeRank" placeholder="Your rank (e.g. Officer II)" />
+      </div>
+
+      <!-- 7) Narrative -->
       <div>
         <label for="narrative">Narrative:</label>
         <textarea id="narrative" rows="4" placeholder="Describe what happened..."></textarea>
       </div>
 
-      <!-- 7) Attachments -->
+      <!-- 8) Attachments -->
       <div>
         <label for="attachments">Attachments:</label>
         <textarea id="attachments" rows="2" placeholder="Any extra references or evidence"></textarea>
       </div>
 
-      <!-- 8) Employee Signature -->
+      <!-- 9) Employee Signature -->
       <div>
         <label for="employeeSig">Employee Signature:</label>
         <input type="text" id="employeeSig" placeholder="Your signature or name" />
