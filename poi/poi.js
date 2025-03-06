@@ -1,6 +1,3 @@
-/**
- * The exact text from poi.txt as a multiline template.
- */
 const poiTemplate = `[divbox=white]
 [center][u]DETECTIVE BUREAU - PERSON OF INTEREST[/u][/center]
 [hr][/hr]
@@ -36,9 +33,9 @@ const poiTemplate = `[divbox=white]
 [/divbox]`;
 
 /**
- * If "alive" is checked, output [b][color=#00BF00]ALIVE[/color][/b].
- * If "dead" is checked, output [b][color=#FF0000]DECEASED[/color][/b].
- * If "unknown" is checked or none, output [b]UNKNOWN[/b].
+ * If "alive" is checked, we output [b][color=#00BF00]ALIVE[/color][/b].
+ * If "dead" is checked, we output [b][color=#FF0000]DECEASED[/color][/b].
+ * If "unknown" is checked or none, we output [b]UNKNOWN[/b].
  */
 function getStatusBBCode() {
   const aliveCheck = document.getElementById('aliveCheck').checked;
@@ -133,14 +130,18 @@ function clearForm() {
 function generateBBCode(event) {
   event.preventDefault(); // Prevent form submission
 
-  // Grab fields
-  const poiName = document.getElementById('poiName').value || 'NAMEHERE';
-  const race = document.getElementById('race').value || 'NAMEHERE';
-  const sex = document.getElementById('sex').value || 'NAMEHERE';
-  const age = document.getElementById('age').value || 'NAMEHERE';
-  const description = document.getElementById('description').value || 'NAMEHERE';
-  const sanGangFile = document.getElementById('sanGangFile').value || 'NAMEHERE';
-  const affiliation = document.getElementById('affiliation').value || 'NAMEHERE';
+  // Grab the new fields
+  const imageUrl = document.getElementById('imageUrl').value.trim() || 'https://i.imgur.com/RvO2yL5.png?1';
+  const mdcUrl = document.getElementById('mdcUrl').value.trim() || 'NAMEHERE';
+
+  // Grab other fields
+  const poiName = document.getElementById('poiName').value.trim() || 'NAMEHERE';
+  const race = document.getElementById('race').value.trim() || 'NAMEHERE';
+  const sex = document.getElementById('sex').value.trim() || 'NAMEHERE';
+  const age = document.getElementById('age').value.trim() || 'NAMEHERE';
+  const description = document.getElementById('description').value.trim() || 'NAMEHERE';
+  const sanGangFile = document.getElementById('sanGangFile').value.trim() || 'NAMEHERE';
+  const affiliation = document.getElementById('affiliation').value.trim() || 'NAMEHERE';
   const statusBB = getStatusBBCode();
 
   // Lists
@@ -152,8 +153,13 @@ function generateBBCode(event) {
   // Make a copy of the template
   let finalText = poiTemplate;
 
-  // Replace placeholders carefully
-  finalText = finalText.replace('[url=NAMEHERE]MDC[/url]', `[url=${poiName}]MDC[/url]`);
+  // 1) Replace the default image with user input
+  finalText = finalText.replace('https://i.imgur.com/RvO2yL5.png?1', imageUrl);
+
+  // 2) Replace the default [url=NAMEHERE]MDC[/url] with the user’s MDC link
+  finalText = finalText.replace('[url=NAMEHERE]MDC[/url]', `[url=${mdcUrl}]MDC[/url]`);
+
+  // 3) Basic placeholders
   finalText = finalText.replace('[b]NAME:[/b] NAMEHERE', `[b]NAME:[/b] ${poiName}`);
   finalText = finalText.replace('[b]RACE:[/b] NAMEHERE', `[b]RACE:[/b] ${race}`);
   finalText = finalText.replace('[b]SEX:[/b] NAMEHERE', `[b]SEX:[/b] ${sex}`);
@@ -163,13 +169,13 @@ function generateBBCode(event) {
     `[b]SAN-GANG File:[/b] [url=${sanGangFile}]ACCESS[/url]`);
   finalText = finalText.replace('[b]Affiliation:[/b] NAMEHERE', `[b]Affiliation:[/b] ${affiliation}`);
 
-  // Status line
+  // 4) Status line
   finalText = finalText.replace(
     '[b]Status:[/b] [b][color=#00BF00]ALIVE[/color][/b]/[b][color=#FF0000]DECEASED[/color][/b]/[b]UNKNOWN[/b]',
     `[b]Status:[/b] ${statusBB}`
   );
 
-  // Known Properties
+  // 5) Known Properties
   if (properties.length > 0) {
     const lines = properties.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n${lines}\n[/list]`);
@@ -177,7 +183,7 @@ function generateBBCode(event) {
     finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n[*] NAMEHERE\n[/list]`);
   }
 
-  // Known Phone Numbers
+  // 6) Known Phone Numbers
   if (phones.length > 0) {
     const lines = phones.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
@@ -191,7 +197,7 @@ function generateBBCode(event) {
     );
   }
 
-  // Known Associates
+  // 7) Known Associates
   if (associates.length > 0) {
     const lines = associates.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
@@ -205,7 +211,7 @@ function generateBBCode(event) {
     );
   }
 
-  // Related IR/CASEFILES
+  // 8) Related IR/CASEFILES
   if (cases.length > 0) {
     const lines = cases.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
