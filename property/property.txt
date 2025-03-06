@@ -1,0 +1,32 @@
+[divbox=white]
+[center][u]DETECTIVE BUREAU - PROPERTY OF INTEREST[/u][/center]
+[divbox=black][center][b][color=#FFFFFF]PROPERTY[/color][/b][/center][/divbox]
+[divbox=white]
+[b]ADDRESS:[/b] NAMEHERE
+[b]PROPERTY TYPE[/b]
+[cb] Business
+[cb] Residence
+[cb] Storage
+[cb] Other: 
+[b]BUSINESS LICENSE(S):[/b] NAMEHERE
+[/divbox]
+[hr][/hr]
+[divbox=black][center][b][color=#FFFFFF]OCCUPANTS[/color][/b][/center][/divbox]
+[divbox=white]
+[b]OWNER NAME:[/b] NAMEHERE
+[b]NON-OWNERS[/b] 
+[list]
+[*]Name - Person's Association To Property
+[/divbox]
+[hr][/hr]
+[divbox=black][center][b][color=#FFFFFF]ATTACHMENTS[/color][/b][/center][/divbox]
+[divbox=white]
+[b]PROPERTY PHOTO(S)[/b]
+[img]NAMEHERE[/img]
+
+[b]OTHER[/b]
+
+NAMEHERE
+
+[/divbox]
+[/divbox]
