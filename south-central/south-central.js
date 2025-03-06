@@ -8,11 +8,11 @@
  */
 const scrTemplate = `[b]GANG(S) INVOLVED:[/b] [i]NAMEHERE[/i]
 
-[b]SUPPLEMENTARY TO?:[/b] [url=NAMEHERE]GEDSCR IR: NAMEHERE[/url]
+[b]SUPPLEMENTARY TO?:[/b] [url=NAMEHERE]GEDSCA IR: NAMEHERE[/url]
 [color=transparent](Provide precise post link if your IR is supplementary to a previous IR submission.)[/color]
 
 
-[altspoiler2=GEDSCR IR: NAMEHERE]
+[altspoiler2=GEDSCA IR: NAMEHERE]
 [divbox=white][aligntable=left,721,0,0,0,0,0][img]https://i.imgur.com/5m4NeKz.png[/img][/aligntable]
 [aligntable=left,721,0,0,0,0,0][divbox=black][b][color=#FFFFFF]AREA INCIDENT REPORT[/color][/b][/divbox][/aligntable]
 [aligntable=left,360,0,0,0,0,0][divbox=white]
@@ -80,13 +80,13 @@ function generateBBCode(e) {
   finalText = finalText.replace('[i]NAMEHERE[/i]', `[i]${gangsInvolved}[/i]`);
 
   // 2) SUPPLEMENTARY => [url=NAMEHERE]GEDSCR IR: NAMEHERE[/url]
-  finalText = finalText.replace('[url=NAMEHERE]GEDSCR IR: NAMEHERE[/url]',
+  finalText = finalText.replace('[url=NAMEHERE]GEDSCA IR: NAMEHERE[/url]',
     `[url=${suppUrl}]GEDSCR IR: ${suppIrTitle}[/url]`
   );
 
   // 3) altspoiler2=GEDSCR IR: NAMEHERE => altspoiler2=GEDSCR IR: spoilerTitle
   finalText = finalText.replace('altspoiler2=GEDSCR IR: NAMEHERE',
-    `altspoiler2=GEDSCR IR: ${spoilerTitle}`);
+    `altspoiler2=GEDSCA IR: ${spoilerTitle}`);
 
   // 4) TIME AND DATE => "NAMEHERE"
   finalText = finalText.replace('[b]TIME AND DATE[/b]: NAMEHERE',
