@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>POI BBCode Generator</title>
+  <link rel="stylesheet" href="poi.css" />
+</head>
+<body class="background">
+  <div class="container">
+    <h1>Person of Interest (POI) BBCode Generator</h1>
+
+    <form id="poiForm">
+      <!-- Basic Fields -->
+      <div>
+        <label for="poiName">Name:</label>
+        <input type="text" id="poiName" placeholder="NAMEHERE" />
+      </div>
+      <div>
+        <label for="race">Race:</label>
+        <input type="text" id="race" placeholder="NAMEHERE" />
+      </div>
+      <div>
+        <label for="sex">Sex:</label>
+        <input type="text" id="sex" placeholder="NAMEHERE" />
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <input type="text" id="age" placeholder="NAMEHERE" />
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea id="description" rows="2" placeholder="NAMEHERE"></textarea>
+      </div>
+      <div>
+        <label for="sanGangFile">SAN-GANG File URL:</label>
+        <input type="text" id="sanGangFile" placeholder="NAMEHERE" />
+      </div>
+      <div>
+        <label for="affiliation">Affiliation:</label>
+        <input type="text" id="affiliation" placeholder="NAMEHERE" />
+      </div>
+
+      <!-- Status (Three Checkboxes) -->
+      <h2>Status</h2>
+      <div class="status-row">
+        <label>
+          <input type="checkbox" id="aliveCheck" /> Alive
+        </label>
+        <label>
+          <input type="checkbox" id="deadCheck" /> Deceased
+        </label>
+        <label>
+          <input type="checkbox" id="unknownCheck" /> Unknown
+        </label>
+      </div>
+
+      <!-- Dynamic Lists -->
+      <h2>Known Properties</h2>
+      <div id="propertiesList" class="list-container"></div>
+      <div class="button-row">
+        <button type="button" id="addProperty">Add Property</button>
+        <button type="button" id="removeProperty">Remove Property</button>
+      </div>
+
+      <h2>Known Phone Numbers</h2>
+      <div id="phonesList" class="list-container"></div>
+      <div class="button-row">
+        <button type="button" id="addPhone">Add Phone</button>
+        <button type="button" id="removePhone">Remove Phone</button>
+      </div>
+
+      <h2>Known Associates</h2>
+      <div id="associatesList" class="list-container"></div>
+      <div class="button-row">
+        <button type="button" id="addAssociate">Add Associate</button>
+        <button type="button" id="removeAssociate">Remove Associate</button>
+      </div>
+
+      <h2>Related IR/Casefiles</h2>
+      <div id="casesList" class="list-container"></div>
+      <div class="button-row">
+        <button type="button" id="addCase">Add Casefile</button>
+        <button type="button" id="removeCase">Remove Casefile</button>
+      </div>
+
+      <!-- Generate & Clear Buttons -->
+      <button type="submit">Generate BBCode</button>
+      <button type="button" id="clearButton" class="clear-button">Clear</button>
+    </form>
+
+    <!-- Output Area -->
+    <div id="bbcodeOutput">
+      <h2>Generated BBCode:</h2>
+      <pre id="bbcodeText"></pre>
+    </div>
+  </div>
+
+  <script src="poi.js"></script>
+</body>
+</html>
