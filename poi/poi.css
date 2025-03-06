@@ -97,11 +97,47 @@ body {
     background-color: #B8322F;
   }
   
-  /* Status checkboxes row */
-  .status-row {
-    display: flex;
-    gap: 20px;
+  /* Container for checkboxes. */
+  .checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for Alive/Deceased/Unknown */
+    gap: 10px;
     margin-bottom: 20px;
+  }
+  
+  /* Hide the native checkbox. */
+  .checkbox-container input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* The label that visually replaces the checkbox. */
+  .checkbox-container label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 2px solid #0C7A87;
+    border-radius: 5px;
+    background-color: #0C7A87;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    user-select: none;
+    color: white;
+  }
+  
+  /* Hover effect for unchecked boxes => scale up slightly */
+  .checkbox-container label:hover {
+    background-color: #0C7A87;
+    border-color: #0C7A87;
+    transform: scale(1.05);
+  }
+  
+  /* When checked => darker teal, no transform on hover */
+  .checkbox-container input[type="checkbox"]:checked + label {
+    background-color: #0A4C54;
+    border-color: #0A4C54;
+    transform: none;
   }
   
   /* BBCode Output */
@@ -115,4 +151,4 @@ body {
     border-radius: 5px;
     white-space: pre-wrap;
     word-wrap: break-word;
-  }  
+  }
