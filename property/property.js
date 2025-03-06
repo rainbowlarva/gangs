@@ -1,11 +1,3 @@
-/****************************************************
- * property.js
- * Property of Interest BBCode Generator
- ****************************************************/
-
-/**
- * The exact text from property.txt
- */
 const propertyTemplate = `[divbox=white]
 [center][u]DETECTIVE BUREAU - PROPERTY OF INTEREST[/u][/center]
 [divbox=black][center][b][color=#FFFFFF]PROPERTY[/color][/b][/center][/divbox]
