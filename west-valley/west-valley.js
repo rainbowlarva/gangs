@@ -1,11 +1,3 @@
-/****************************************************
- * west-valley.js
- * West Valley BBCode Generator
- ****************************************************/
-
-/**
- * The exact text from west-valley.txt as a multiline template.
- */
 const westValleyTemplate = `[b]GANG(S) INVOLVED:[/b] [i]NAMEHERE[/i]
 
 [b]SUPPLEMENTARY TO?:[/b] [url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]
@@ -69,6 +61,8 @@ function generateBBCode(e) {
   const spoilerTitle  = document.getElementById('spoilerTitle').value.trim() || 'NAMEHERE';
   const timeDate      = document.getElementById('timeDate').value.trim()     || 'NAMEHERE';
   const location      = document.getElementById('location').value.trim()     || 'NAMEHERE';
+  const employeeName  = document.getElementById('employeeName').value.trim() || 'NAMEHERE';
+  const employeeRank  = document.getElementById('employeeRank').value.trim() || 'NAMEHERE';
   const narrative     = document.getElementById('narrative').value.trim()    || 'NAMEHERE';
   const attachments   = document.getElementById('attachments').value.trim()  || 'NAMEHERE';
   const employeeSig   = document.getElementById('employeeSig').value.trim()  || 'NAMEHERE';
@@ -81,10 +75,7 @@ function generateBBCode(e) {
   // GANG(S) INVOLVED => [i]NAMEHERE[/i]
   finalText = finalText.replace('[i]NAMEHERE[/i]', `[i]${gangsInvolved}[/i]`);
 
-  // SUPPLEMENTARY TO => [url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]
-  // We have 2 placeholders in the same line:
-  //   [url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]
-  // We'll do a regex approach or do partial replacements:
+  // SUPPLEMENTARY => [url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]
   finalText = finalText.replace('[url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]',
     `[url=${suppUrl}]GEDWVA IR: ${suppIrTitle}[/url]`
   );
@@ -101,8 +92,13 @@ function generateBBCode(e) {
   finalText = finalText.replace('[b]LOCATION[/b]: NAMEHERE',
     `[b]LOCATION[/b]: ${location}`);
 
-  // NARRATIVE => "NAMEHERE" in the line with newlines around it
-  // We'll do a partial approach:
+  // EMPLOYEE FULL NAME & DEPARTMENTAL RANK
+  finalText = finalText.replace(
+    '[b]EMPLOYEE FULL NAME:[/b] \n[b]DEPARTMENTAL RANK:[/b] \n',
+    `[b]EMPLOYEE FULL NAME:[/b] ${employeeName}\n[b]DEPARTMENTAL RANK:[/b] ${employeeRank}\n`
+  );
+
+  // NARRATIVE => "NAMEHERE" with newlines around it
   finalText = finalText.replace('\nNAMEHERE\n\n', `\n${narrative}\n\n`);
 
   // ATTACHMENTS => "NAMEHERE" with newlines around it
