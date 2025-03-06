@@ -1,11 +1,3 @@
-/****************************************************
- * fic.js
- * Field Interview Card (FIC) Generator
- ****************************************************/
-
-/**
- * The exact text from fic.txt as a multiline template.
- */
 const ficTemplate = `[divbox=white]
 [center][size=115][u]FIELD INTERVIEW CARD[/u][/size][/center]
 [hr][/hr]
@@ -42,7 +34,7 @@ NAMEHERE
 function getGangMemberBBCode() {
   const gangCheck = document.getElementById('gangCheck').checked;
   return gangCheck 
-    ? `[cbx] [b]§ 305 GANG MEMBER[/b]`
+    ? `[cbc] [b]§ 305 GANG MEMBER[/b]`
     : `[cb] [b]§ 305 GANG MEMBER[/b]`;
 }
 
@@ -61,11 +53,11 @@ function getCircumstanceBBCode() {
   // [cbx]CONSENSUAL / [cb]DETAIN / [cb]ARREST / [cb]OTHER
   // but only the chosen one is [cbx], the others are [cb].
   // If "OTHER" is chosen, we might do => [cbx]OTHER: userValue
-  const cConsensual = consensual ? `[cbx]CONSENSUAL` : `[cb]CONSENSUAL`;
-  const cDetain     = detain     ? `[cbx]DETAIN`    : `[cb]DETAIN`;
-  const cArrest     = arrest     ? `[cbx]ARREST`    : `[cb]ARREST`;
+  const cConsensual = consensual ? `[cbc]CONSENSUAL` : `[cb]CONSENSUAL`;
+  const cDetain     = detain     ? `[cbc]DETAIN`    : `[cb]DETAIN`;
+  const cArrest     = arrest     ? `[cbc]ARREST`    : `[cb]ARREST`;
   const cOther      = circOther  
-    ? `[cbx]OTHER: ${circOtherValue || 'N/A'}`
+    ? `[cbc]OTHER: ${circOtherValue || 'N/A'}`
     : `[cb]OTHER`;
 
   // Then combine them in the same line with " / "
