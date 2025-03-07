@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.dropdown').forEach(dropdown => {
         dropdown.classList.add('active');
     });
-    
+
     const dropdownButtons = document.querySelectorAll('.dropdown-btn');
     dropdownButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -55,6 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.addEventListener('click', (e) => {
        if (e.target === modalOverlay) {
          modalOverlay.classList.remove('open');
+         modalImage.classList.remove('zoomed');
        }
+    });
+    
+    modalImage.addEventListener('click', (e) => {
+       e.stopPropagation();
+       modalImage.classList.toggle('zoomed');
     });
 });
