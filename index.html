@@ -16,11 +16,37 @@
   <link rel="stylesheet" href="gangs.css" />
 </head>
 <body class="background">
+  <!-- ======== LEFT SIDEBAR ======== -->
+  <div class="sidebar">
+    <!-- Sidebar image placeholder -->
+    <img src="detective.png" alt="Sidebar Placeholder" class="sidebar-image">
+
+    <!-- Text beneath image -->
+    <div class="sidebar-text">
+      <p>Detectives Bureau</p>
+    </div>
+
+    <!-- Example dropdown #1 -->
+    <div class="dropdown">
+      <button class="dropdown-btn">Useful Resources</button>
+      <div class="dropdown-content">
+        <a href="https://mdc.gta.world/" target="_blank">Mobile Data Computer</a>
+        <a href="https://forum.gta.world/en/topic/78852-san-andreas-penal-code/" target="_blank">Penal Code</a>
+        <a href="https://forum.gta.world/en/topic/71740-san-andreas-legislation-index/" target="_blank">Legislation Index</a>
+        <a href="https://productofmymind.github.io/GTAW-CCTVs/" target="_blank">CCTV Map</a>
+        <!-- Added id to the Forum Drive Map link -->
+        <a href="https://i.imgur.com/xGdxtiC.png" id="forumDriveMap">Forum Drive Map</a>
+        <a href="#" id="latestMap">Gang Map</a>
+      </div>
+    </div>
+    <!-- ======== END SIDEBAR ======== -->
+  </div>
+
   <!-- Top Logo -->
   <img src="git.png" class="gitlogo" />
 
   <div class="prdcontainer">
-  <h1>GANG IMPACT TEAM</h1>
+    <h1>GANG IMPACT TEAM</h1>
     <div class="git-container">
       <a href="poi/poi.html" class="image-button">
         <img src="thumbnails/person-of-interest.png" alt="poi">
@@ -38,11 +64,20 @@
         <img src="thumbnails/ged-wva-ir.png" alt="wva">
         <p>West Valley Area Incident Report</p>
       </a>
-      <a href="south-central/south-central.html" class="image-button">
+      <a href="ged-sca-ir.html" class="image-button">
         <img src="thumbnails/ged-sca-ir.png" alt="scr">
         <p>South Central Area Incident Report</p>
       </a>
     </div>
   </div> <!-- end prdcontainer -->
+
+  <!-- Modal Overlay (initially hidden) -->
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image">
+    </div>
+  </div>
+
+  <script src="gangs.js"></script>
 </body>
 </html>
