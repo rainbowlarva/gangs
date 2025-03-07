@@ -25,11 +25,6 @@ NAMEHERE
 NAMEHERE
 [/divbox]`;
 
-/**
- * We'll handle the single checkbox for GANG MEMBER,
- * and the four for CIRCUMSTANCE (only one can be selected).
- */
-
 // Make GANG MEMBER line [cbx] if checked, else [cb].
 function getGangMemberBBCode() {
   const gangCheck = document.getElementById('gangCheck').checked;
@@ -38,10 +33,6 @@ function getGangMemberBBCode() {
     : `[cb] [b]§ 305 GANG MEMBER[/b]`;
 }
 
-/**
- * For the 4 CIRCUMSTANCE checkboxes: CONSENSUAL, DETAIN, ARREST, OTHER
- * Only one can be selected at a time. If OTHER is selected, we might add custom text.
- */
 function getCircumstanceBBCode() {
   const consensual = document.getElementById('consensualCheck').checked;
   const detain     = document.getElementById('detainCheck').checked;
@@ -49,10 +40,6 @@ function getCircumstanceBBCode() {
   const circOther  = document.getElementById('circOtherCheck').checked;
   const circOtherValue = document.getElementById('circOtherInput').value.trim();
 
-  // We'll build a single line like: 
-  // [cbx]CONSENSUAL / [cb]DETAIN / [cb]ARREST / [cb]OTHER
-  // but only the chosen one is [cbx], the others are [cb].
-  // If "OTHER" is chosen, we might do => [cbx]OTHER: userValue
   const cConsensual = consensual ? `[cbc]CONSENSUAL` : `[cb]CONSENSUAL`;
   const cDetain     = detain     ? `[cbc]DETAIN`    : `[cb]DETAIN`;
   const cArrest     = arrest     ? `[cbc]ARREST`    : `[cb]ARREST`;
@@ -64,9 +51,6 @@ function getCircumstanceBBCode() {
   return `${cConsensual} / ${cDetain} / ${cArrest} / ${cOther}`;
 }
 
-/**
- * Only one of the 4 circumstance checkboxes can be selected.
- */
 function handleCircumstanceCheck(e) {
   const clickedId = e.target.id;
   const all = ['consensualCheck','detainCheck','arrestCheck','circOtherCheck'];
@@ -75,16 +59,12 @@ function handleCircumstanceCheck(e) {
       document.getElementById(id).checked = false;
     }
   });
-  // If "circOtherCheck" is selected, show input; else hide it
   const container = document.getElementById('circOtherInputContainer');
   container.style.display = (clickedId === 'circOtherCheck' && e.target.checked)
     ? 'block'
     : 'none';
 }
 
-/**
- * Clear the entire form and output.
- */
 function clearForm() {
   document.getElementById('ficForm').reset();
   // Hide the otherCircum input
@@ -93,9 +73,6 @@ function clearForm() {
   document.getElementById('bbcodeText').textContent = '';
 }
 
-/**
- * Generate the final BBCode, place it in #bbcodeText, highlight it.
- */
 function generateBBCode(event) {
   event.preventDefault();
 
@@ -114,7 +91,6 @@ function generateBBCode(event) {
   const attachments = document.getElementById('attachments').value.trim() || 'NAMEHERE';
   const employeeSig = document.getElementById('employeeSig').value.trim() || 'NAMEHERE';
 
-  // Make a copy of the ficTemplate
   let finalText = ficTemplate;
 
   // 1) Date/Time
@@ -128,12 +104,8 @@ function generateBBCode(event) {
   // 5) Subject Name
   finalText = finalText.replace('[b]SUBJECT NAME[/b]: NAMEHERE', `[b]SUBJECT NAME[/b]: ${subjectName}`);
 
-  // GANG MEMBER line => replace `[cb] [b]§ 305 GANG MEMBER[/b]`
-  // with either `[cbx] [b]§ 305 GANG MEMBER[/b]` or `[cb] [b]§ 305 GANG MEMBER[/b]`
   finalText = finalText.replace('[cb] [b]§ 305 GANG MEMBER[/b]', gangLine);
 
-  // CIRCUMSTANCE => `[cb]CONSENSUAL / [cb]DETAIN / [cb]ARREST / [cb]OTHER`
-  // replaced with the single line we built
   const circRegex = /\[cb\]CONSENSUAL\s*\/\s*\[cb\]DETAIN\s*\/\s*\[cb\]ARREST\s*\/\s*\[cb\]OTHER/;
   finalText = finalText.replace(circRegex, circumstanceLine);
 
@@ -172,8 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Clear
   document.getElementById('clearButton').addEventListener('click', clearForm);
 
-  // For GANG check => it's a single box, no special logic needed besides storing if checked
-  // For Circumstance => only one can be selected
   const circBoxes = ['consensualCheck','detainCheck','arrestCheck','circOtherCheck'];
   circBoxes.forEach(id => {
     document.getElementById(id).addEventListener('change', (e) => {
@@ -183,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById(otherId).checked = false;
         }
       });
-      // Show/hide the "circOtherInputContainer" if "circOtherCheck" is selected
       const container = document.getElementById('circOtherInputContainer');
       container.style.display = (e.target.id === 'circOtherCheck' && e.target.checked)
         ? 'block'
