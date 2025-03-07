@@ -24,32 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
        showModal(imageUrl);
     });
     
-    // Helper function: try fetching images from the album, with a fallback to the gallery endpoint
+    // Helper function: fetch images from the album using the standard endpoint only.
     async function fetchAlbumImages(albumId) {
-       // Try the standard album endpoint first
-       let response = await fetch(`https://api.imgur.com/3/album/${albumId}/images`, {
+       const response = await fetch(`https://api.imgur.com/3/album/${albumId}/images`, {
          headers: {
            'Authorization': 'Client-ID 634e5da0086834e'
          }
        });
-       let data = await response.json();
-       if (data.success && data.data && data.data.length > 0) {
-         return data.data;
-       }
-       // Fallback to the gallery endpoint
-       response = await fetch(`https://api.imgur.com/3/gallery/album/${albumId}/images`, {
-         headers: {
-           'Authorization': 'Client-ID 634e5da0086834e'
-         }
-       });
-       data = await response.json();
-       if (data.success && data.data && data.data.length > 0) {
-         return data.data;
-       }
-       return [];
+       const data = await response.json();
+       return (data.success && data.data && data.data.length > 0) ? data.data : [];
     }
     
-    // New: Latest Gang Map link using the Imgur API with fallback
+    // Latest Gang Map link using the Imgur API
     const latestMapLink = document.getElementById('latestMap');
     latestMapLink.addEventListener('click', async (e) => {
        e.preventDefault();
