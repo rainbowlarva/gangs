@@ -164,13 +164,13 @@ function generateBBCode(event) {
   if (associates.length > 0) {
     const lines = associates.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace(
-      '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
-      `[b]Known Associates[/b]:\n[list]\n${lines}\n[/list]`
+      /(\[b\]Known Associates:\[\/b\]:\s*\[list\]\s*\[\*\]\s*)NAMEHERE(\s*\[\/list\])/,
+      `$1${lines}$2`
     );
   } else {
     finalText = finalText.replace(
-      '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
-      `[b]Known Associates[/b]:\n[list]\n[*] N/A\n[/list]`
+      /(\[b\]Known Associates:\[\/b\]:\s*\[list\]\s*\[\*\]\s*)NAMEHERE(\s*\[\/list\])/,
+      `$1[*] N/A$2`
     );
   }
 
