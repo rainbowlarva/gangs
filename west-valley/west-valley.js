@@ -40,79 +40,62 @@ NAMEHERE
 [hr][/hr][/divbox]
 [/altspoiler2]`;
 
-/**
- * Clears the form and output.
- */
 function clearForm() {
   document.getElementById('westValleyForm').reset();
   document.getElementById('bbcodeText').textContent = '';
 }
 
-/**
- * Generate BBCode from the template, replacing each NAMEHERE with user input.
- */
 function generateBBCode(e) {
   e.preventDefault();
 
-  // 1) Gather user inputs
-  const gangsInvolved = document.getElementById('gangsInvolved').value.trim() || 'NAMEHERE';
-  const suppUrl       = document.getElementById('suppUrl').value.trim()      || 'NAMEHERE';
-  const suppIrTitle   = document.getElementById('suppIrTitle').value.trim()  || 'NAMEHERE';
-  const spoilerTitle  = document.getElementById('spoilerTitle').value.trim() || 'NAMEHERE';
-  const timeDate      = document.getElementById('timeDate').value.trim()     || 'NAMEHERE';
-  const location      = document.getElementById('location').value.trim()     || 'NAMEHERE';
-  const employeeName  = document.getElementById('employeeName').value.trim() || 'NAMEHERE';
-  const employeeRank  = document.getElementById('employeeRank').value.trim() || 'NAMEHERE';
-  const narrative     = document.getElementById('narrative').value.trim()    || 'NAMEHERE';
-  const attachments   = document.getElementById('attachments').value.trim()  || 'NAMEHERE';
-  const employeeSig   = document.getElementById('employeeSig').value.trim()  || 'NAMEHERE';
+  const gangsInvolved = document.getElementById('gangsInvolved').value.trim() || 'N/A';
+  const suppUrl       = document.getElementById('suppUrl').value.trim()      || 'N/A';
+  const suppIrTitle   = document.getElementById('suppIrTitle').value.trim()  || 'N/A';
+  const spoilerTitle  = document.getElementById('spoilerTitle').value.trim() || 'N/A';
+  const timeDate      = document.getElementById('timeDate').value.trim()     || 'N/A';
+  const location      = document.getElementById('location').value.trim()     || 'N/A';
+  const employeeName  = document.getElementById('employeeName').value.trim() || 'N/A';
+  const employeeRank  = document.getElementById('employeeRank').value.trim() || 'N/A';
+  const narrative     = document.getElementById('narrative').value.trim()    || 'N/A';
+  const attachments   = document.getElementById('attachments').value.trim()  || 'N/A';
+  const employeeSig   = document.getElementById('employeeSig').value.trim()  || 'N/A';
 
-  // 2) Copy the template
   let finalText = westValleyTemplate;
 
-  // 3) Replace placeholders
 
-  // GANG(S) INVOLVED => [i]NAMEHERE[/i]
   finalText = finalText.replace('[i]NAMEHERE[/i]', `[i]${gangsInvolved}[/i]`);
 
-  // SUPPLEMENTARY => [url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]
   finalText = finalText.replace('[url=NAMEHERE]GEDWVA IR: NAMEHERE[/url]',
     `[url=${suppUrl}]GEDWVA IR: ${suppIrTitle}[/url]`
   );
 
-  // altspoiler2=GEDWVA IR: NAMEHERE => altspoiler2=GEDWVA IR: spoilerTitle
   finalText = finalText.replace('altspoiler2=GEDWVA IR: NAMEHERE',
-    `altspoiler2=GEDWVA IR: ${spoilerTitle}`);
+    `altspoiler2=GEDWVA IR: ${spoilerTitle}`
+  );
 
-  // TIME AND DATE => [b]TIME AND DATE[/b]: NAMEHERE
   finalText = finalText.replace('[b]TIME AND DATE[/b]: NAMEHERE',
-    `[b]TIME AND DATE[/b]: ${timeDate}`);
+    `[b]TIME AND DATE[/b]: ${timeDate}`
+  );
 
-  // LOCATION => [b]LOCATION[/b]: NAMEHERE
   finalText = finalText.replace('[b]LOCATION[/b]: NAMEHERE',
-    `[b]LOCATION[/b]: ${location}`);
+    `[b]LOCATION[/b]: ${location}`
+  );
 
-  // EMPLOYEE FULL NAME & DEPARTMENTAL RANK
   finalText = finalText.replace(
     '[b]EMPLOYEE FULL NAME:[/b] \n[b]DEPARTMENTAL RANK:[/b] \n',
     `[b]EMPLOYEE FULL NAME:[/b] ${employeeName}\n[b]DEPARTMENTAL RANK:[/b] ${employeeRank}\n`
   );
 
-  // NARRATIVE => "NAMEHERE" with newlines around it
   finalText = finalText.replace('\nNAMEHERE\n\n', `\n${narrative}\n\n`);
 
-  // ATTACHMENTS => "NAMEHERE" with newlines around it
-  finalText = finalText.replace('\nNAMEHERE\n\n[/divbox][/aligntable]',
-    `\n${attachments}\n\n[/divbox][/aligntable]`);
+  finalText = finalText.replace(/(\n\s*)NAMEHERE(\s*\n\[\/divbox\]\[\/aligntable\])/, `\n${attachments}$2`);
 
-  // EMPLOYEE SIGNATURE => final "NAMEHERE\n\n"
   finalText = finalText.replace('NAMEHERE\n\n[/divbox][/aligntable]',
-    `${employeeSig}\n\n[/divbox][/aligntable]`);
+    `${employeeSig}\n\n[/divbox][/aligntable]`
+  );
 
-  // 4) Display final text in #bbcodeText
   document.getElementById('bbcodeText').textContent = finalText;
 
-  // 5) Auto-highlight
   const codeElement = document.getElementById('bbcodeText');
   const range = document.createRange();
   range.selectNodeContents(codeElement);
@@ -121,9 +104,6 @@ function generateBBCode(e) {
   selection.addRange(range);
 }
 
-/**
- * Wire up event listeners on DOM load
- */
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('westValleyForm').addEventListener('submit', generateBBCode);
   document.getElementById('clearButton').addEventListener('click', clearForm);
