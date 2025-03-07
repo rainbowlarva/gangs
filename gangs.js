@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
          // Replace "YOUR_CLIENT_ID" with your actual Imgur client ID.
          const response = await fetch('https://api.imgur.com/3/album/ls-gang-map-of-gta-world-uQyYFzW/images', {
            headers: {
-             'Authorization': '634e5da0086834e'
+             'Authorization': 'Client-ID 634e5da0086834e'
            }
          });
          const data = await response.json();
