@@ -38,13 +38,12 @@ function buildPropertyTypeBBCode() {
   const otherChecked     = document.getElementById('otherCheck').checked;
   const otherValue       = document.getElementById('otherType').value.trim();
 
-  const businessLine  = businessChecked  ? `[cbc] Business`  : `[cb] Business`;
-  const residenceLine = residenceChecked ? `[cbc] Residence` : `[cb] Residence`;
-  const storageLine   = storageChecked   ? `[cbc] Storage`   : `[cb] Storage`;
+  const businessLine  = businessChecked  ? `[cbx] Business`  : `[cb] Business`;
+  const residenceLine = residenceChecked ? `[cbx] Residence` : `[cb] Residence`;
+  const storageLine   = storageChecked   ? `[cbx] Storage`   : `[cb] Storage`;
 
-  // If “Other” is checked => [cbx] Other: userValue, else => [cb] Other:
   const otherLine = otherChecked
-    ? `[cbc] Other: ${otherValue || 'N/A'}`
+    ? `[cbx] Other: ${otherValue || 'N/A'}`
     : `[cb] Other: `;
 
   return [
@@ -64,20 +63,15 @@ function handlePropertyTypeCheck(event) {
       document.getElementById(id).checked = false;
     }
   });
-  // Show/hide the “Specify Other Type” input
   toggleOtherType();
 }
 
-/**
- * Show or hide the “otherTypeContainer” depending on whether “otherCheck” is checked.
- */
 function toggleOtherType() {
   const isOther = document.getElementById('otherCheck').checked;
   const container = document.getElementById('otherTypeContainer');
   container.style.display = isOther ? 'block' : 'none';
 }
 
-/** Add an input for the Non-Owners list. */
 function addNonOwner() {
   const container = document.getElementById('nonOwnersList');
   const input = document.createElement('input');
@@ -87,7 +81,6 @@ function addNonOwner() {
   container.appendChild(input);
 }
 
-/** Remove the last input from Non-Owners. */
 function removeNonOwner() {
   const container = document.getElementById('nonOwnersList');
   if (container.lastChild) {
@@ -95,7 +88,6 @@ function removeNonOwner() {
   }
 }
 
-/** Gather occupant lines from Non-Owners. */
 function getNonOwners() {
   const container = document.getElementById('nonOwnersList');
   const inputs = container.querySelectorAll('.list-input');
@@ -107,65 +99,50 @@ function getNonOwners() {
   return lines;
 }
 
-/** Clear the entire form. */
 function clearForm() {
   document.getElementById('propertyForm').reset();
-  // Clear dynamic Non-Owners
   document.getElementById('nonOwnersList').innerHTML = '';
-  // Hide “Other Type” container
   document.getElementById('otherTypeContainer').style.display = 'none';
-  // Clear output
   document.getElementById('bbcodeText').textContent = '';
 }
 
-/** Generate final BBCode from propertyTemplate. */
 function generateBBCode(e) {
   e.preventDefault();
 
-  // 1) Basic fields
-  const address = document.getElementById('address').value.trim() || 'NAMEHERE';
+  const address = document.getElementById('address').value.trim() || 'N/A';
   const propertyTypeBB = buildPropertyTypeBBCode(); // Our [cb]/[cbx] lines
-  const businessLicenses = document.getElementById('businessLicenses').value.trim() || 'NAMEHERE';
+  const businessLicenses = document.getElementById('businessLicenses').value.trim() || 'N/A';
 
-  // Occupants
-  const ownerName = document.getElementById('ownerName').value.trim() || 'NAMEHERE';
+  const ownerName = document.getElementById('ownerName').value.trim() || 'N/A';
   const nonOwners = getNonOwners();
 
-  // Attachments
-  const propertyPhoto = document.getElementById('propertyPhoto').value.trim() || 'NAMEHERE';
-  const otherText     = document.getElementById('otherAttachments').value.trim() || 'NAMEHERE';
+  const propertyPhoto = document.getElementById('propertyPhoto').value.trim() || 'N/A';
+  const otherText     = document.getElementById('otherAttachments').value.trim() || 'N/A';
 
-  // 2) Make a copy
   let finalText = propertyTemplate;
 
-  // 3) Replace placeholders
-  // a) Address
   finalText = finalText.replace('[b]ADDRESS:[/b] NAMEHERE', `[b]ADDRESS:[/b] ${address}`);
 
-  // b) Replace the 4 lines of [cb] with our propertyTypeBB
   const propertyTypeRegex = /\[cb\] Business\s*\[cb\] Residence\s*\[cb\] Storage\s*\[cb\] Other:/;
   finalText = finalText.replace(propertyTypeRegex, propertyTypeBB);
 
-  // c) Business Licenses
   finalText = finalText.replace('[b]BUSINESS LICENSE(S):[/b] NAMEHERE', 
-    `[b]BUSINESS LICENSE(S):[/b] ${businessLicenses}`);
+    `[b]BUSINESS LICENSE(S):[/b] ${businessLicenses}`
+  );
 
-  // d) Owner Name
   finalText = finalText.replace('[b]OWNER NAME:[/b] NAMEHERE', 
-    `[b]OWNER NAME:[/b] ${ownerName}`);
+    `[b]OWNER NAME:[/b] ${ownerName}`
+  );
 
-  // e) Non-Owners => the template has “[*]Name - Person's Association To Property”
   if (nonOwners.length > 0) {
     const occupantLines = nonOwners.join('\n');
     finalText = finalText.replace('[*]Name - Person\'s Association To Property', occupantLines);
   }
 
-  // f) Property Photo(s)
   finalText = finalText.replace('[img]NAMEHERE[/img]', `[img]${propertyPhoto}[/img]`);
 
   finalText = finalText.replace('\nNAMEHERE\n', `\n${otherText}\n`);
 
-  // 4) Output & Highlight
   document.getElementById('bbcodeText').textContent = finalText;
   const range = document.createRange();
   range.selectNodeContents(document.getElementById('bbcodeText'));
@@ -174,28 +151,22 @@ function generateBBCode(e) {
   sel.addRange(range);
 }
 
-/** On DOM load, wire up everything. */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1) Handle form submission => generate
   document.getElementById('propertyForm').addEventListener('submit', generateBBCode);
 
-  // 2) Clear
   document.getElementById('clearButton').addEventListener('click', clearForm);
 
-  // 3) Non-Owners dynamic
   document.getElementById('addNonOwner').addEventListener('click', addNonOwner);
   document.getElementById('removeNonOwner').addEventListener('click', removeNonOwner);
 
   const allChecks = ['businessCheck','residenceCheck','storageCheck','otherCheck'];
   allChecks.forEach(id => {
     document.getElementById(id).addEventListener('change', (e) => {
-      // Uncheck all except the one that was clicked
       allChecks.forEach(otherId => {
         if (otherId !== e.target.id) {
           document.getElementById(otherId).checked = false;
         }
       });
-      // Show/hide otherType input
       toggleOtherType();
     });
   });
