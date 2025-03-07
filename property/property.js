@@ -31,11 +31,6 @@ NAMEHERE
 [/divbox]
 [/divbox]`;
 
-/**
- * Build the [cb]/[cbx] lines for property type:
- * - If a box is checked, it becomes [cbx], otherwise [cb].
- * - If “Other” is checked, we also append user text.
- */
 function buildPropertyTypeBBCode() {
   const businessChecked = document.getElementById('businessCheck').checked;
   const residenceChecked = document.getElementById('residenceCheck').checked;
@@ -60,10 +55,6 @@ function buildPropertyTypeBBCode() {
   ].join('\n');
 }
 
-/** 
- * Only one property type can be selected at a time. 
- * If “Other” is checked, show the extra input. 
- */
 function handlePropertyTypeCheck(event) {
   const clickedId = event.target.id;
   const all = ['businessCheck', 'residenceCheck', 'storageCheck', 'otherCheck'];
@@ -172,13 +163,6 @@ function generateBBCode(e) {
   // f) Property Photo(s)
   finalText = finalText.replace('[img]NAMEHERE[/img]', `[img]${propertyPhoto}[/img]`);
 
-  // g) “OTHER” => The template has a line: 
-  // 
-  // [b]OTHER[/b]
-  //
-  // NAMEHERE
-  //
-  // We replace that “NAMEHERE” with the user text
   finalText = finalText.replace('\nNAMEHERE\n', `\n${otherText}\n`);
 
   // 4) Output & Highlight
@@ -202,8 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('addNonOwner').addEventListener('click', addNonOwner);
   document.getElementById('removeNonOwner').addEventListener('click', removeNonOwner);
 
-  // 4) If “Other” is checked => uncheck others + show input
-  // If businessCheck, residenceCheck, storageCheck is checked => uncheck the rest
   const allChecks = ['businessCheck','residenceCheck','storageCheck','otherCheck'];
   allChecks.forEach(id => {
     document.getElementById(id).addEventListener('change', (e) => {
