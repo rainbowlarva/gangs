@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
        showModal(imageUrl);
     });
     
-    // Helper function: fetch images from the album using the standard endpoint only.
+    // Helper function: fetch images from the album using the standard endpoint.
     async function fetchAlbumImages(albumId) {
        const response = await fetch(`https://api.imgur.com/3/album/${albumId}/images`, {
          headers: {
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
        return (data.success && data.data && data.data.length > 0) ? data.data : [];
     }
     
-    // Latest Gang Map link using the Imgur API
+    // Latest Gang Map link using the Imgur API with album ID "uQyYFzW"
     const latestMapLink = document.getElementById('latestMap');
     latestMapLink.addEventListener('click', async (e) => {
        e.preventDefault();
        try {
-         const images = await fetchAlbumImages('ls-gang-map-of-gta-world-uQyYFzW');
+         const images = await fetchAlbumImages('uQyYFzW');
          if (images.length > 0) {
            // Get the last image from the album
            const lastImage = images[images.length - 1];
