@@ -85,10 +85,6 @@ function generateBBCode(e) {
   finalText = finalText.replace('[b]TIME AND DATE[/b]: \n[b]LOCATION[/b]: ',
     `[b]TIME AND DATE[/b]: ${timeDate}\n[b]LOCATION[/b]: ${location} `);
 
-  // 5) EMPLOYEE FULL NAME & DEPARTMENTAL RANK
-  // Currently it's:
-  // [b]EMPLOYEE FULL NAME:[/b] 
-  // [b]DEPARTMENTAL RANK:[/b]
   finalText = finalText.replace(
     '[b]EMPLOYEE FULL NAME:[/b] \n[b]DEPARTMENTAL RANK:[/b] \n',
     `[b]EMPLOYEE FULL NAME:[/b] ${employeeName}\n[b]DEPARTMENTAL RANK:[/b] ${departmentRank}\n`
