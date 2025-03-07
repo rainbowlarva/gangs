@@ -230,6 +230,7 @@ body.background {
   border-radius: 5px;
   max-width: 90%;
   max-height: 90%;
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
 }
 
 .modal-content img {
