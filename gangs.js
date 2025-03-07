@@ -8,14 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     
-    // Modal functionality for Forum Drive Map and Metro/Sewer Map
+    // Modal functionality for Forum Drive Map
     const forumDriveMapLink = document.getElementById('forumDriveMap');
     const modalOverlay = document.getElementById('modalOverlay');
     const modalImage = document.getElementById('modalImage');
     
     function showModal(imageUrl) {
        modalImage.setAttribute('src', imageUrl);
-       // Add the open class to trigger the fade-in transition
        modalOverlay.classList.add('open');
     }
     
@@ -25,21 +24,40 @@ document.addEventListener('DOMContentLoaded', () => {
        showModal(imageUrl);
     });
     
-    // New: Latest Gang Map link using the Imgur API
+    // Helper function: try fetching images from the album, with a fallback to the gallery endpoint
+    async function fetchAlbumImages(albumId) {
+       // Try the standard album endpoint first
+       let response = await fetch(`https://api.imgur.com/3/album/${albumId}/images`, {
+         headers: {
+           'Authorization': 'Client-ID 634e5da0086834e'
+         }
+       });
+       let data = await response.json();
+       if (data.success && data.data && data.data.length > 0) {
+         return data.data;
+       }
+       // Fallback to the gallery endpoint
+       response = await fetch(`https://api.imgur.com/3/gallery/album/${albumId}/images`, {
+         headers: {
+           'Authorization': 'Client-ID 634e5da0086834e'
+         }
+       });
+       data = await response.json();
+       if (data.success && data.data && data.data.length > 0) {
+         return data.data;
+       }
+       return [];
+    }
+    
+    // New: Latest Gang Map link using the Imgur API with fallback
     const latestMapLink = document.getElementById('latestMap');
     latestMapLink.addEventListener('click', async (e) => {
        e.preventDefault();
        try {
-         // Replace "YOUR_CLIENT_ID" with your actual Imgur client ID.
-         const response = await fetch('https://api.imgur.com/3/album/ls-gang-map-of-gta-world-uQyYFzW/images', {
-           headers: {
-             'Authorization': 'Client-ID 634e5da0086834e'
-           }
-         });
-         const data = await response.json();
-         if (data.success && data.data && data.data.length > 0) {
+         const images = await fetchAlbumImages('ls-gang-map-of-gta-world-uQyYFzW');
+         if (images.length > 0) {
            // Get the last image from the album
-           const lastImage = data.data[data.data.length - 1];
+           const lastImage = images[images.length - 1];
            showModal(lastImage.link);
          } else {
            console.error('No images found in album');
