@@ -76,7 +76,6 @@ function addListItem(containerId) {
 
 function removeListItem(containerId) {
   const container = document.getElementById(containerId);
-  // Just remove the last child if it exists:
   if (container && container.lastChild) {
     container.removeChild(container.lastChild);
   }
@@ -145,6 +144,8 @@ function generateBBCode(event) {
   if (properties.length > 0) {
     const lines = properties.map(item => `[*] ${item}`).join('\n');
     finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n${lines}\n[/list]`);
+  } else {
+    finalText = finalText.replace('[list]\n[*] NAMEHERE\n[/list]', `[list]\n[*] N/A\n[/list]`);
   }
 
   if (phones.length > 0) {
@@ -152,6 +153,11 @@ function generateBBCode(event) {
     finalText = finalText.replace(
       '[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Phone Numbers:[/b]\n[list]\n${lines}\n[/list]`
+    );
+  } else {
+    finalText = finalText.replace(
+      '[b]Known Phone Numbers:[/b]\n[list]\n[*] NAMEHERE\n[/list]',
+      `[b]Known Phone Numbers:[/b]\n[list]\n[*] N/A\n[/list]`
     );
   }
 
@@ -161,6 +167,11 @@ function generateBBCode(event) {
       '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Known Associates[/b]:\n[list]\n${lines}\n[/list]`
     );
+  } else {
+    finalText = finalText.replace(
+      '[b]Known Associates[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
+      `[b]Known Associates[/b]:\n[list]\n[*] N/A\n[/list]`
+    );
   }
 
   if (cases.length > 0) {
@@ -168,6 +179,11 @@ function generateBBCode(event) {
     finalText = finalText.replace(
       '[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
       `[b]Related IR/CASEFILES[/b]:\n[list]\n${lines}\n[/list]`
+    );
+  } else {
+    finalText = finalText.replace(
+      '[b]Related IR/CASEFILES[/b]:\n[list]\n[*] NAMEHERE\n[/list]',
+      `[b]Related IR/CASEFILES[/b]:\n[list]\n[*] N/A\n[/list]`
     );
   }
 
