@@ -96,9 +96,6 @@ function removeListItem(containerId) {
   }
 }
 
-/**
- * Returns an array of trimmed input values from a container's .list-input fields.
- */
 function getListItems(containerId) {
   const container = document.getElementById(containerId);
   const inputs = container.querySelectorAll('.list-input');
@@ -110,9 +107,6 @@ function getListItems(containerId) {
   return items;
 }
 
-/**
- * Clears the form, removes all dynamic inputs, and clears the BBCode output.
- */
 function clearForm() {
   document.getElementById('poiForm').reset();
   // Remove dynamic inputs from each container:
@@ -122,13 +116,9 @@ function clearForm() {
   document.getElementById('bbcodeText').textContent = '';
 }
 
-/**
- * Generates BBCode, places it in #bbcodeText, and auto-highlights it.
- */
 function generateBBCode(event) {
   event.preventDefault(); // Prevent form submission
 
-  // Gather normal fields
   const poiName     = document.getElementById('poiName').value.trim()     || 'NAMEHERE';
   const imageUrl    = document.getElementById('imageUrl').value.trim()    || 'https://i.imgur.com/RvO2yL5.png?1';
   const mdcUrl      = document.getElementById('mdcUrl').value.trim()      || 'NAMEHERE';
