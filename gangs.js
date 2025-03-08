@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       delete window[callbackName];
     };
   
-    const url = `https://script.google.com/macros/s/AKfycbwNwXxip3SuazHYEyctu_1D6EzuP7rW43JCANj9Wsbb2SZdn1bLoCb_HmGE02nC_4Q/exec?callback=${callbackName}`;
+    const url = `https://script.google.com/macros/s/AKfycby3lsyLP2ML4V34Jn33jRp_dcObJl8a9t2-XRUfnVBZF0NjtNUlR_RrXwuJUxChuHnU/exec?callback=${callbackName}`;
   
     console.log("Requesting JSONP from:", url);
     script.src = url;
