@@ -62,27 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.classList.toggle('zoomed');
   });
   
-  // --- Google Content Dropdown Banner using JSONP ---
-  const googleHeader = document.getElementById('googleHeader');
-  const googleDropdown = document.getElementById('googleDropdown');
-  
+// --- Google Content Dropdown Banner using JSONP ---
+const googleHeader = document.getElementById('googleHeader');
+const googleDropdown = document.getElementById('googleDropdown');
+
   googleHeader.addEventListener('click', () => {
     // Immediately toggle the dropdown open/closed
     googleDropdown.classList.toggle('open');
     
-    // Create a unique callback function name
-    const callbackName = 'handleGoogleContent';
+    // Generate a unique callback function name using a timestamp
+    const callbackName = 'handleGoogleContent_' + Date.now();
+    
+    // Create a script element variable that will be used for JSONP
+    let script = document.createElement('script');
     
     // Define the callback function to process the JSONP response
     window[callbackName] = function(data) {
+      console.log("JSONP callback called with data:", data);
       googleDropdown.innerHTML = data.content;
       // Clean up: remove the script element and delete the callback
-      document.body.removeChild(script);
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
       delete window[callbackName];
     };
     
-    // Create a script element for the JSONP request
-    const script = document.createElement('script');
     // Append the callback parameter to your Apps Script URL
     script.src = 'https://script.google.com/macros/s/AKfycbyE3tRIrTzeTiPhC4xgvrAguksWAspwf4TnbgGAiiGHFVP3wgTihgvR-VOkvo0X2Rby/exec?mode=get&callback=' + callbackName;
     document.body.appendChild(script);
