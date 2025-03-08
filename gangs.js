@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     // Construct the JSONP URL
-    const url = 'https://script.google.com/macros/s/AKfycbxfcFfAl2pLmmYrjp5iKzzXtVxtYN3K93MAVkS8b54dErICA8Ngm6oKuNzgDmRBuAnb/exec'
+    const url = 'https://script.google.com/macros/s/AKfycbxXpJHQniBULcYGYw70q9f04uZ1nRrHFuF0_zgh6vSE8-hkN9-LnEAknK0kV6KRIakk/exec'
               + '?mode=get&callback=' + callbackName;
     
     console.log("Requesting JSONP from:", url);
