@@ -47,15 +47,14 @@
           // Replace YOUR_SCRIPT_ID with your deployed Google Apps Script ID
           const url = 'https://script.google.com/macros/s/AKfycbwfvD19CUQaNyiSTNomRq8V15qpW8WBbsEjGuOESQ56kY8q3_EWgIRi8Bbkpo4ktQeB/exec';
           try {
-              const response = await fetch(url, {
+              await fetch(url, {
                   method: 'POST',
-                  mode: 'cors',
+                  mode: 'no-cors',
                   headers: {
                       'Content-Type': 'application/json'
                   },
                   body: JSON.stringify(payload)
               });
-              const result = await response.json();
               document.getElementById('status').textContent = 'Updated successfully!';
           } catch (error) {
               console.error(error);
