@@ -13,56 +13,95 @@
     <div class="admin-container">
       <form id="sheetForm">
         <div>
+          <label for="toggleInjunction">Active Injunction?:</label>
+          <input type="checkbox" id="toggleInjunction">
+        </div>
+        <div>
           <label for="name">Injunction Name:</label>
           <input type="text" id="name" name="name" placeholder="Enter name" required>
         </div>
         <div>
-          <label for="image">Injunction Safetyzone:</label>
-          <input type="file" id="image" name="image" accept="image/*" required>
+          <label for="image">Injunction Safetyzone (Optional):</label>
+          <input type="file" id="image" name="image" accept="image/*">
         </div>
         <button type="submit">Add Injunction</button>
       </form>
     </div>
     <div id="status"></div>
   </main>
+
   <script>
     document.getElementById('sheetForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const imageInput = document.getElementById('image');
-      if (!imageInput.files || !imageInput.files[0]) {
-          alert("Please select an image file.");
-          return;
-      }
-      const imageFile = imageInput.files[0];
+      let imageData = null;  // Default to no image
 
-      // Convert image file to a base64 data URL
-      const reader = new FileReader();
-      reader.onload = async function() {
-          const imageData = reader.result; // Base64 data URL
-          const payload = {
-              name: name,
-              imageData: imageData
-          };
-          // Replace YOUR_SCRIPT_ID with your deployed Google Apps Script ID
-          const url = 'https://script.google.com/macros/s/AKfycbzxTFwdado0vELyF9PGVSu_VcI001l0mkOjVCJp_cxaeNGDoque8H9YlbGxBB-dYsEu/exec';
-          try {
-              await fetch(url, {
-                  method: 'POST',
-                  mode: 'no-cors',
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(payload)
-              });
-              document.getElementById('status').textContent = 'Updated successfully!';
-          } catch (error) {
-              console.error(error);
-              document.getElementById('status').textContent = 'Error updating sheet.';
-          }
-      };
-      reader.readAsDataURL(imageFile);
+      if (imageInput.files.length > 0) {
+        // Convert image file to a base64 data URL
+        const reader = new FileReader();
+        reader.onload = async function() {
+          imageData = reader.result; // Base64 data URL
+          sendData(name, imageData); // Send data once image is ready
+        };
+        reader.readAsDataURL(imageInput.files[0]);
+      } else {
+        sendData(name, null); // Send data immediately if no image is provided
+      }
     });
+
+    async function sendData(name, imageData) {
+      const payload = { name: name, imageData: imageData };
+      const url = 'https://script.google.com/macros/s/AKfycbziEz0kbc-30ejccExk7d-ARTsDC6zbEQWF6klYNIsCK1LcfNtFARVypUr1THV_R4WZ/exec';
+
+      try {
+        await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        document.getElementById('status').textContent = 'Updated successfully!';
+      } catch (error) {
+        console.error(error);
+        document.getElementById('status').textContent = 'Error updating sheet.';
+      }
+    }
   </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleSwitch = document.getElementById("toggleInjunction");
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbziEz0kbc-30ejccExk7d-ARTsDC6zbEQWF6klYNIsCK1LcfNtFARVypUr1THV_R4WZ/exec";
+
+    // Fetch the current toggle state from Google Sheets
+    fetch(`${webAppUrl}?mode=get`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Fetched toggle state:", data.injunctionVisible);
+        toggleSwitch.checked = data.injunctionVisible === true; // Ensure proper boolean conversion
+      })
+      .catch(error => console.error("Error fetching toggle state:", error));
+
+    // Save the new state when toggled
+    toggleSwitch.addEventListener("change", function () {
+      const isChecked = toggleSwitch.checked;
+      console.log("Sending new state:", isChecked);
+
+      fetch(webAppUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: "saveToggle", injunctionVisible: isChecked })
+      })
+      .then(response => response.json())
+      .then(() => {
+        console.log("Toggle state saved:", isChecked);
+      })
+      .catch(error => console.error("Error saving toggle state:", error));
+    });
+  });
+</script>
+
 </body>
 </html>
