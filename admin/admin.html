@@ -52,7 +52,7 @@
 
     async function sendData(name, imageData) {
       const payload = { name: name, imageData: imageData };
-      const url = 'https://script.google.com/macros/s/AKfycbziEz0kbc-30ejccExk7d-ARTsDC6zbEQWF6klYNIsCK1LcfNtFARVypUr1THV_R4WZ/exec';
+      const url = 'https://script.google.com/macros/s/AKfycbxy90Z2hmDIVJxmBbaMgRNDx2omI2eJbDzDlujxMbiSi8xrwE_D8FHXXGOOQQe2WPNN/exec';
 
       try {
         await fetch(url, {
@@ -73,7 +73,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggleSwitch = document.getElementById("toggleInjunction");
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbziEz0kbc-30ejccExk7d-ARTsDC6zbEQWF6klYNIsCK1LcfNtFARVypUr1THV_R4WZ/exec";
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbxy90Z2hmDIVJxmBbaMgRNDx2omI2eJbDzDlujxMbiSi8xrwE_D8FHXXGOOQQe2WPNN/exec";
 
     // Fetch the current toggle state from Google Sheets
     fetch(`${webAppUrl}?mode=get`)
