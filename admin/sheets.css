@@ -10,101 +10,101 @@ html, body {
   position: relative;
 }
   
-  .background {
-    background-image: linear-gradient(#2A2E33, #1F2226);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-  }
+.background {
+  background-image: linear-gradient(#2A2E33, #1F2226);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
   
-  a {
-    text-decoration: none;
-  }
+a {
+  text-decoration: none;
+}
   
-  .prdcontainer {
-    text-align: center;
-    color: white;
-    overflow: hidden;
-    width: 100%;
-    padding-bottom: 5%;
-  }
+.prdcontainer {
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 5%;
+}
   
-  /* Top logo */
-  .prdcontainer img {
-    display: inline-block;
-    margin: 10px;
-  }
+/* Top logo */
+.prdcontainer img {
+  display: inline-block;
+  margin: 10px;
+}
   
-  /* Various logos */
-  .gitlogo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 300px;
-    height: 300px;
-  }
+/* Various logos */
+.gitlogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 300px;
+  height: 300px;
+}
   
-  /* Container boxes for each section */
-  .git-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    border: 5px solid #32383E;
-    border-radius: 10px;
-    background-color: #3C4349;
-    box-shadow: 0 0 5px #000000;
-    width: fit-content;
-    max-width: 860px;
-    margin: 20px auto;
-    padding: 20px;
-  }
+/* Container boxes for each section */
+.git-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  border: 5px solid #32383E;
+  border-radius: 10px;
+  background-color: #3C4349;
+  box-shadow: 0 0 5px #000000;
+  width: fit-content;
+  max-width: 860px;
+  margin: 20px auto;
+  padding: 20px;
+}
   
-  /* Grayscale + hover scale */
-  .image-button {
-    filter: grayscale(100%);
-    text-align: center;
-    transform: translateY(0) scale(1);
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
+/* Grayscale + hover scale */
+.image-button {
+  filter: grayscale(100%);
+  text-align: center;
+  transform: translateY(0) scale(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
   
-  .image-button img {
-    width: 200px;
-    height: 200px;
-    border: 2px solid black;
-    border-radius: 5px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+.image-button img {
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
   
-  .image-button:hover img {
-    box-shadow: 0 0 16px #5F6972;
-    transform: translateY(-3px) scale(1.05);
-  }
+.image-button:hover img {
+  box-shadow: 0 0 16px #5F6972;
+  transform: translateY(-3px) scale(1.05);
+}
   
-  .image-button p {
-    color: white;
-    white-space: normal;
-    max-width: 200px;
-    transition: color 0.3s ease;
-  }
+.image-button p {
+  color: white;
+  white-space: normal;
+  max-width: 200px;
+  transition: color 0.3s ease;
+}
   
-  .image-button:hover p {
-    color: #DBDBDB;
-  }
+.image-button:hover p {
+  color: #DBDBDB;
+}
   
-  /* Headings */
-  h1 {
-    color: #B9AA85;
-  }
+/* Headings */
+h1 {
+  color: #B9AA85;
+}
   
-  h2 {
-    color: #B9AA85;
-  }
+h2 {
+  color: #B9AA85;
+}
 
-  /* === SIDEBAR STYLES === */
+/* === SIDEBAR STYLES === */
 .sidebar {
   position: fixed;
   left: 0;
@@ -248,4 +248,50 @@ body.background {
   max-width: none;
   max-height: none;
   cursor: zoom-out;
+}
+
+/* === Admin Page Styles === */
+.admin-container {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #3C4349;
+  border: 5px solid #32383E;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #000000;
+}
+
+.admin-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #B9AA85;
+  font-size: 1.2rem;
+}
+
+.admin-container input[type="text"],
+.admin-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #32383E;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.admin-container button {
+  width: 100%;
+  background-color: #32383E;
+  color: #A89D8F;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-container button:hover {
+  background-color: #545B60;
 }
