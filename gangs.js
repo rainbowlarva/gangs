@@ -75,24 +75,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
     window[callbackName] = function(data) {
       console.log("Received Data:", data);
-  
+    
       if (data.name && data.imageUrl.startsWith("http")) {
         googleDropdown.innerHTML = `
           <div class="injunction-content">
             <h2>${data.name}</h2>
             <img src="${data.imageUrl}" alt="Injunction Image" class="injunction-image"
               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Image+Not+Found';">
+            <div class="injunction-info">${data.injunctionInfo}</div>
           </div>
         `;
       } else {
         googleDropdown.innerHTML = `<p>No injunction data found.</p>`;
       }
-  
+    
       document.body.removeChild(script);
       delete window[callbackName];
     };
+    
   
-    const url = `https://script.google.com/macros/s/AKfycbzxTFwdado0vELyF9PGVSu_VcI001l0mkOjVCJp_cxaeNGDoque8H9YlbGxBB-dYsEu/exec?callback=${callbackName}`;
+    const url = `https://script.google.com/macros/s/AKfycbzvCS0IKhffdKDyAiOxuPw10SJZ_ebwZoxqY7w3guuF60zBdUFEnK8TxxBfK9iuV_2A/exec?callback=${callbackName}`;
   
     console.log("Requesting JSONP from:", url);
     script.src = url;
