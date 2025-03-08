@@ -255,7 +255,7 @@ body.background {
   position: fixed;
   top: 0;
   left: 250px; /* start after the sidebar */
-  width: calc(22% - 250px);
+  width: calc(200px);
   background-color: #FFD800;
   color: black;
   padding: 10px;
