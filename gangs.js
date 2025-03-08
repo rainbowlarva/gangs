@@ -62,41 +62,39 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.classList.toggle('zoomed');
   });
   
-  // --- Google Content Dropdown Banner using JSONP ---
   const googleHeader = document.getElementById('googleHeader');
   const googleDropdown = document.getElementById('googleDropdown');
   
   googleHeader.addEventListener('click', () => {
-    // Immediately toggle the dropdown open/closed
     googleDropdown.classList.toggle('open');
-    
-    // Generate a unique callback function name using a timestamp
+  
     const callbackName = 'handleGoogleContent_' + Date.now();
     console.log("Callback name:", callbackName);
-    
-    // Create a script element variable that will be used for JSONP
+  
     let script = document.createElement('script');
-    
-    // Define the callback function to process the JSONP response
+  
     window[callbackName] = function(data) {
-      console.log("JSONP callback called with data:", data);
-      // If your doGet returns { content: "Your Google content goes here" }
-      // then data.content is "Your Google content goes here"
-      googleDropdown.innerHTML = data.content || "No 'content' in the JSON!";
-      
-      // Clean up: remove the script element and delete the callback
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
+      console.log("Received Data:", data);
+  
+      if (data.name && data.imageUrl && data.imageUrl !== "No image available") {
+        googleDropdown.innerHTML = `
+          <div class="injunction-content">
+            <h2>${data.name}</h2>
+            <img src="${data.imageUrl}" alt="Injunction Image" class="injunction-image">
+          </div>
+        `;
+      } else {
+        googleDropdown.innerHTML = `<p>No injunction data found.</p>`;
       }
+  
+      document.body.removeChild(script);
       delete window[callbackName];
     };
-    
-    // Construct the JSONP URL
-    const url = 'https://script.google.com/macros/s/AKfycbxXpJHQniBULcYGYw70q9f04uZ1nRrHFuF0_zgh6vSE8-hkN9-LnEAknK0kV6KRIakk/exec'
-              + '?mode=get&callback=' + callbackName;
-    
+  
+    const url = `https://script.google.com/macros/s/AKfycbxXpJHQniBULcYGYw70q9f04uZ1nRrHFuF0LnEAknK0kV6KRIakk/exec?callback=${callbackName}`;
+  
     console.log("Requesting JSONP from:", url);
     script.src = url;
     document.body.appendChild(script);
-  });
+  });  
 });
