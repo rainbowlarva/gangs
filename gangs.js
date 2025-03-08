@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         googleDropdown.innerHTML = `
           <div class="injunction-content">
             <h2>${data.name}</h2>
-            <img src="${data.imageUrl}" alt="Injunction Image" class="injunction-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=No+Image';">
+            <img src="${data.imageUrl}" alt="Injunction Image" class="injunction-image" onerror="this.onerror=null; this.src='https://i.imgur.com/NnhDZ4J.jpeg';">
           </div>
         `;
       } else {
