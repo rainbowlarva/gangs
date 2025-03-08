@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window[callbackName] = function(data) {
       console.log("Received Data:", data);
   
-      if (data.name && data.imageUrl && data.imageUrl.startsWith("http")) {
+      if (data.name && data.imageUrl.startsWith("http")) {
         googleDropdown.innerHTML = `
           <div class="injunction-content">
             <h2>${data.name}</h2>
@@ -92,10 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
       delete window[callbackName];
     };
   
-    const url = `https://script.google.com/macros/s/AKfycby3lsyLP2ML4V34Jn33jRp_dcObJl8a9t2-XRUfnVBZF0NjtNUlR_RrXwuJUxChuHnU/exec?callback=${callbackName}`;
+    const url = `https://script.google.com/macros/s/AKfycbzxTFwdado0vELyF9PGVSu_VcI001l0mkOjVCJp_cxaeNGDoque8H9YlbGxBB-dYsEu/exec?callback=${callbackName}`;
   
     console.log("Requesting JSONP from:", url);
     script.src = url;
     document.body.appendChild(script);
-  });
+  });  
 });
