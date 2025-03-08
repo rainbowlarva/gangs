@@ -276,21 +276,24 @@ body.background {
   top: 39px; /* adjust based on the banner height */
   left: 250px;
   width: calc(600px);
-  height: 640px;
+  max-height: 0; /* collapsed initially */
+  overflow: hidden;
   background-color: #475056;
   color: #B9AA85;
   border: 5px solid #32383E;
-  padding: 10px;
+  padding: 0 10px; /* no vertical padding initially */
   z-index: 10000;
-  display: none;
   box-sizing: border-box;
   box-shadow: 0 0 5px #000000;
+  opacity: 0;
+  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
 }
 
 .google-dropdown-banner.open {
-  display: block;
+  max-height: 640px; /* adjust to the desired expanded height */
+  padding: 10px;    /* add vertical padding when open */
+  opacity: 1;
 }
-
 
 .hidden-link {
   pointer-events: none;
