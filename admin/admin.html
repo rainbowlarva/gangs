@@ -7,20 +7,22 @@
 </head>
 <body class="background">
   <header>
-    <h1>Update Google Sheet</h1>
+    <h1>Injunction Panel</h1>
   </header>
   <main>
-    <form id="sheetForm">
-      <div>
-        <label for="name">Injunction Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter name" required>
-      </div>
-      <div>
-        <label for="image">Injunction Safetyzone:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
-      </div>
-      <button type="submit">Update Sheet</button>
-    </form>
+    <div class="admin-container">
+      <form id="sheetForm">
+        <div>
+          <label for="name">Injunction Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter name" required>
+        </div>
+        <div>
+          <label for="image">Injunction Safetyzone:</label>
+          <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <button type="submit">Add Injunction</button>
+      </form>
+    </div>
     <div id="status"></div>
   </main>
   <script>
