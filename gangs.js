@@ -62,16 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.classList.toggle('zoomed');
   });
   
-// --- Google Content Dropdown Banner using JSONP ---
-const googleHeader = document.getElementById('googleHeader');
-const googleDropdown = document.getElementById('googleDropdown');
-
+  // --- Google Content Dropdown Banner using JSONP ---
+  const googleHeader = document.getElementById('googleHeader');
+  const googleDropdown = document.getElementById('googleDropdown');
+  
   googleHeader.addEventListener('click', () => {
     // Immediately toggle the dropdown open/closed
     googleDropdown.classList.toggle('open');
     
     // Generate a unique callback function name using a timestamp
     const callbackName = 'handleGoogleContent_' + Date.now();
+    console.log("Callback name:", callbackName);
     
     // Create a script element variable that will be used for JSONP
     let script = document.createElement('script');
@@ -79,7 +80,10 @@ const googleDropdown = document.getElementById('googleDropdown');
     // Define the callback function to process the JSONP response
     window[callbackName] = function(data) {
       console.log("JSONP callback called with data:", data);
-      googleDropdown.innerHTML = data.content;
+      // If your doGet returns { content: "Your Google content goes here" }
+      // then data.content is "Your Google content goes here"
+      googleDropdown.innerHTML = data.content || "No 'content' in the JSON!";
+      
       // Clean up: remove the script element and delete the callback
       if (script.parentNode) {
         script.parentNode.removeChild(script);
@@ -87,8 +91,12 @@ const googleDropdown = document.getElementById('googleDropdown');
       delete window[callbackName];
     };
     
-    // Append the callback parameter to your Apps Script URL
-    script.src = 'https://script.google.com/macros/s/AKfycbyE3tRIrTzeTiPhC4xgvrAguksWAspwf4TnbgGAiiGHFVP3wgTihgvR-VOkvo0X2Rby/exec?mode=get&callback=' + callbackName;
+    // Construct the JSONP URL
+    const url = 'https://script.google.com/macros/s/AKfycbyE3tRIrTzeTiPhC4xgvrAguksWAspwf4TnbgGAiiGHFVP3wgTihgvR-VOkvo0X2Rby/exec'
+              + '?mode=get&callback=' + callbackName;
+    
+    console.log("Requesting JSONP from:", url);
+    script.src = url;
     document.body.appendChild(script);
   });
 });
