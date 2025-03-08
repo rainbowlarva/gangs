@@ -275,8 +275,8 @@ body.background {
   position: fixed;
   top: 39px; /* adjust based on the banner height */
   left: 250px;
-  width: calc(50% - 250px);
-  height: 67%;
+  width: calc(600px);
+  height: 640px;
   background-color: #475056;
   color: #B9AA85;
   border: 5px solid #32383E;
@@ -309,8 +309,8 @@ body.background {
 }
 
 .injunction-image {
-  max-width: 95%;
-  max-height: 95%; /* Ensures it does not become too large */
+  max-width: 500px;
+  max-height: 500px;
   width: auto;
   height: auto;
   border: 2px solid #32383E;
