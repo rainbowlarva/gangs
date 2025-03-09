@@ -1,234 +1,87 @@
-s/ged.png<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>LSPD Generators</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- CSS Style Sheet -->
-  <link rel="stylesheet" href="generators.css">
+  <meta charset="UTF-8" />
+  <title>GIT Generators</title>
+  <!-- Hidden link to admin page (will not be visible or clickable) -->
+  <a href="admin.html" style="display: none;">Admin Page</a>
+  <!-- Fonts, CSS, etc. -->
+  <link rel="stylesheet" href="gangs.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 </head>
-<body class="background">
 
+<body class="background">
+  <a href="admin/admin.html" class="hidden-link">Admin Page</a>
   <!-- ======== LEFT SIDEBAR ======== -->
   <div class="sidebar">
-    <!-- Placeholder image -->
-    <img src="sidebar.png" alt="Sidebar Placeholder" class="sidebar-image">
+    <!-- Sidebar image placeholder -->
+    <img src="detective.png" alt="Sidebar Placeholder" class="sidebar-image">
 
     <!-- Text beneath image -->
     <div class="sidebar-text">
-      <p>Los Santos Police Dept.</p>
-      <p>(Placeholder Text)</p>
+      <p>Detectives Bureau</p>
     </div>
 
     <!-- Example dropdown #1 -->
     <div class="dropdown">
       <button class="dropdown-btn">Useful Resources</button>
       <div class="dropdown-content">
-        <a href="https://mdc.gta.world/"  target="_blank">Mobile Data Computer</a>
-        <a href="https://lspd.gta.world/viewtopic.php?f=20&t=74720" target="_blank">Department Manual</a>
-        <a href="https://lspd.gta.world/viewtopic.php?f=20&t=76307" target="_blank">Vehicle Inventory</a>
-        <a href="https://lspd.gta.world/viewforum.php?f=434" target="_blank">Police Records Database</a>
+        <a href="https://mdc.gta.world/" target="_blank">Mobile Data Computer</a>
         <a href="https://forum.gta.world/en/topic/78852-san-andreas-penal-code/" target="_blank">Penal Code</a>
         <a href="https://forum.gta.world/en/topic/71740-san-andreas-legislation-index/" target="_blank">Legislation Index</a>
         <a href="https://productofmymind.github.io/GTAW-CCTVs/" target="_blank">CCTV Map</a>
-        <a href="https://docs.google.com/spreadsheets/d/1LoooApR7QxGAA5SYscfSrMM3pP5KoPW1guwHAoqxIk0/edit?usp=sharing" target="_blank">Dotson's Condensed Commands</a>
+        <!-- Added id to the Forum Drive Map link -->
+        <a href="https://i.imgur.com/xGdxtiC.png" id="forumDriveMap">Forum Drive Map</a>
+        <a href="#" id="latestMap">Gang Map</a>
       </div>
     </div>
-
-    <div class="dropdown">
-      <button class="dropdown-btn">Other Paperwork Generators</button>
-      <div class="dropdown-content">
-        <a href="https://oggy.wtf/lspdpaperworkgenerator/arrestreport.html" target="_blank">Oggy's Arrest Report</a>
-        <a href="https://report.monstyy.top/" target="_blank">Monster's Arrest Report</a>
-        <a href="https://panel.booskit.dev/" target="_blank">MDC Panel</a>
-        <a href="https://dev.st3fannl.nl/card/" target="_blank">Business Cards</a>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button class="dropdown-btn">Other Resources</button>
-      <div class="dropdown-content">
-        <a href="https://i.imgur.com/xGdxtiC.png" target="_blank">Forum Drive Map</a>
-        <a href="https://i.imgur.com/UBSWJkB.png" target="_blank">Metro/Sewer Map</a>
-
-      </div>
-    </div>
-
-    <!-- Add more dropdowns or links as needed -->
+    <!-- ======== END SIDEBAR ======== -->
   </div>
-  <!-- ======== END SIDEBAR ======== -->
 
-  <!-- ======== MAIN CONTENT ======== -->
+  <!-- === Google Banner (does not cover sidebar) === -->
+  <div class="google-banner">
+    <div id="googleHeader">!! INJUNCTION !! ▼</div>
+  </div>
+  <div id="googleDropdown" class="google-dropdown-banner"></div>
+
+  <!-- Top Logo -->
+  <img src="git.png" class="gitlogo" />
+
   <div class="prdcontainer">
-    <!-- TWO-COLUMN LAYOUT WRAPPER -->
-    <div class="two-column-layout">
-      
-      <!-- 1) DEPARTMENT RECORDS (Left) -->
-      <div class="section-block">
-        <img src="logos/lspd.png" class="drdlogo">
-        <button class="toggle-button" onclick="toggleSection('recordsSection')">
-          POLICE RECORDS DATABASE
-        </button>
-        <div id="recordsSection" class="records-container collapse">
-          <a href="ccr/ccr.html" class="image-button">
-            <img src="thumbnails/ccr.png" alt="CCR">
-            <p>Crime Complaint Report</p>
-          </a>
-          <a href="uof/uof.html" class="image-button">
-            <img src="thumbnails/uof.png" alt="Uof">
-            <p>Use of Force Report</p>
-          </a>
-          <a href="fi-card/fi-card.html" class="image-button">
-            <img src="thumbnails/ficard.png" alt="FICard">
-            <p>Field Interview Card</p>
-          </a>
-          <a href="property-release/property-release.html" class="image-button">
-            <img src="thumbnails/property.png" alt="Property">
-            <p>Property Release Receipt</p>
-          </a>
-          <a href="after-action/after-action.html" class="image-button">
-            <img src="thumbnails/aar.png" alt="AAR">
-            <p>After Action Report</p>
-          </a>
-          <a href="fleet-service/fleet-service.html" class="image-button">
-            <img src="thumbnails/fsr.png" alt="FSR">
-            <p>Fleet Services Request</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- 2) MISSION ROW DIVISION (Right) -->
-      <div class="section-block">
-        <img src="logos/mrd.png" class="mrdlogo">
-        <button class="toggle-button" onclick="toggleSection('mrdSection')">
-          MISSION ROW DIVISION
-        </button>
-        <div id="mrdSection" class="mrd-container collapse">
-          <a href="page6.html" class="image-button">
-            <img src="thumbnails/vinewood.png" alt="Vinewood">
-            <p>Vinewood Area Notes</p>
-          </a>
-          <a href="page7.html" class="image-button">
-            <img src="thumbnails/westvalley.png" alt="West Valley">
-            <p>West Valley Area Notes</p>
-          </a>
-          <a href="page8.html" class="image-button">
-            <img src="thumbnails/southcentral.png" alt="South Central">
-            <p>South Central Area Notes</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- 3) FIELD TRAINING PROGRAM (Left) -->
-      <div class="section-block">
-        <img src="logos/ftp.png" class="ftplogo">
-        <button class="toggle-button" onclick="toggleSection('ftpSection')">
-          FIELD TRAINING PROGRAM
-        </button>
-        <div id="ftpSection" class="ftp-container collapse">
-          <a href="page9.html" class="image-button">
-            <img src="thumbnails/orientation.png" alt="Orientation">
-            <p>Orientation Report</p>
-          </a>
-          <a href="page10.html" class="image-button">
-            <img src="thumbnails/dor.png" alt="DOR">
-            <p>Daily Observation Report</p>
-          </a>
-          <a href="page11.html" class="image-button">
-            <img src="thumbnails/fto-record.png" alt="FTO Record">
-            <p>FTO Record</p>
-          </a>
-          <a href="page12.html" class="image-button">
-            <img src="thumbnails/fto-monthly.png" alt="FTO Monthly">
-            <p>FTO Monthly Record</p>
-          </a>
-          <a href="page13.html" class="image-button">
-            <img src="thumbnails/weeklymeeting.png" alt="Weekly Meeting">
-            <p>Weekly Evaluation Report (FTM USE)</p>
-          </a>
-          <a href="page14.html" class="image-button">
-            <img src="thumbnails/sit-in.png" alt="Sit In">
-            <p>Sit-in (FTM USE)</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- 4) TRAFFIC DIVISION (Right) -->
-      <div class="section-block">
-        <img src="logos/traffic.png" class="ftplogo">
-        <button class="toggle-button" onclick="toggleSection('trafficSection')">
-          TRAFFIC DIVISION
-        </button>
-        <div id="trafficSection" class="traffic-container collapse">
-          <a href="largeop.html" class="image-button">
-            <img src="thumbnails/largeop.png" alt="largeop">
-            <p>Large Operation</p>
-          </a>
-          <a href="oic.html" class="image-button">
-            <img src="thumbnails/oic.png" alt="oic">
-            <p>Officer Involved Collision</p>
-          </a>
-          <a href="cec.html" class="image-button">
-            <img src="thumbnails/cec.png" alt="cec">
-            <p>City Employee Collision</p>
-          </a>
-          <a href="fatal.html" class="image-button">
-            <img src="thumbnails/fatal.png" alt="fatal">
-            <p>Fatality Collision</p>
-          </a>
-          <a href="civi.html" class="image-button">
-            <img src="thumbnails/civilian.png" alt="civi">
-            <p>Civilian Collision</p>
-          </a>
-          <a href="sanstreet.html" class="image-button">
-            <img src="thumbnails/sanstreet.png" alt="sanstreet">
-            <p>SanStreet Entry</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- 5) GANG IMPACT TEAM (Left) -->
-      <div class="section-block">
-        <img src="logos/git.png" class="gitlogo">
-        <button class="toggle-button" onclick="toggleSection('gitSection')">
-          GANG IMPACT TEAM
-        </button>
-        <div id="gitSection" class="git-container collapse">
-          <h1>ACCESS DENIED - SPEAK TO YOUR LINE MANAGER FOR ACCESS</h1>
-          <a href="https://lspd.gta.world/memberlist.php?mode=group&g=340" target="_blank" class="db-button">
-            <img src="logos/ged.png" alt="URL">
-            <p>Gang Enforcement Detail Supervisory</p>
-          </a>
-          <a href="https://lspd.gta.world/memberlist.php?mode=group&g=358" target="_blank" class="db-button">
-            <img src="logos/ned.png" alt="URL">
-            <p>Narcotics Enforcement Detail Supervisory</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- 6) METROPOLITAN DIVISION (Right) -->
-      <div class="section-block">
-        <img src="logos/metro.png" class="swatlogo">
-        <button class="toggle-button" onclick="toggleSection('metroSection')">
-          METROPOLITAN DIVISION
-        </button>
-        <div id="metroSection" class="metro-container collapse">
-          <h1>ACCESS DENIED - SPEAK TO YOUR LINE MANAGER FOR ACCESS</h1>
-        </div>
-      </div>
-
-    </div> <!-- end two-column-layout -->
+    <h1>GANG IMPACT TEAM</h1>
+    <div class="git-container">
+      <a href="poi/poi.html" class="image-button">
+        <img src="thumbnails/person-of-interest.png" alt="poi">
+        <p>Person of Interest</p>
+      </a>
+      <a href="property/property.html" class="image-button">
+        <img src="thumbnails/property-of-interest.png" alt="poi2">
+        <p>Property of Interest</p>
+      </a>
+      <a href="fi-card/fic.html" class="image-button">
+        <img src="thumbnails/field-interview-card.png" alt="fic">
+        <p>Field Interview Card</p>
+      </a>
+      <a href="west-valley/west-valley.html" class="image-button">
+        <img src="thumbnails/ged-wva-ir.png" alt="wva">
+        <p>West Valley Area Incident Report</p>
+      </a>
+      <a href="ged-sca-ir.html" class="image-button">
+        <img src="thumbnails/ged-sca-ir.png" alt="scr">
+        <p>South Central Area Incident Report</p>
+      </a>
+    </div>
   </div> <!-- end prdcontainer -->
 
-  <!-- External JavaScript -->
-  <script src="collapsible.js"></script>
+  <!-- Modal Overlay (initially hidden) -->
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image">
+    </div>
+  </div>
+
+  <script src="gangs.js"></script>
 </body>
 </html>
