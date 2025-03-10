@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Google Sheet</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="background">
+  <header>
+    <h1>Injunction Panel</h1>
+  </header>
+  <main>
+    <div class="admin-container">
+      <form id="sheetForm">
+        <div>
+          <label for="name">Injunction Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter name" required>
+        </div>
+        <div>
+          <label for="image">Injunction Safetyzone:</label>
+          <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <!-- New textarea for Injunction Description -->
+        <div>
+          <label for="injunctionDesc">Injunction Description:</label>
+          <textarea id="injunctionDesc" name="injunctionDesc" placeholder="Enter injunction description"></textarea>
+        </div>
+        <button type="submit">Add Injunction</button>
+      </form>
+    </div>
+    <div id="status"></div>
+  </main>
+  <script>
+    document.getElementById('sheetForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Collect form data
+      const name = document.getElementById('name').value;
+      const imageInput = document.getElementById('image');
+      const injunctionDesc = document.getElementById('injunctionDesc').value;
+      
+      if (!imageInput.files || !imageInput.files[0]) {
+          alert("Please select an image file.");
+          return;
+      }
+      const imageFile = imageInput.files[0];
+      
+      // Convert image file to a base64 data URL
+      const reader = new FileReader();
+      reader.onload = async function() {
+          const imageData = reader.result; // Base64 data URL
+          const payload = {
+              name: name,
+              imageData: imageData,
+              injunctionDesc: injunctionDesc  // send the description
+          };
+          // Replace YOUR_SCRIPT_URL with your deployed Apps Script URL
+          const url = 'https://script.google.com/macros/s/AKfycbzvCS0IKhffdKDyAiOxuPw10SJZ_ebwZoxqY7w3guuF60zBdUFEnK8TxxBfK9iuV_2A/exec';
+          try {
+              await fetch(url, {
+                  method: 'POST',
+                  mode: 'no-cors',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+              });
+              document.getElementById('status').textContent = 'Updated successfully!';
+          } catch (error) {
+              console.error(error);
+              document.getElementById('status').textContent = 'Error updating sheet.';
+          }
+      };
+      
+      reader.readAsDataURL(imageFile);
+    });
+  </script>
+</body>
+</html>

@@ -6,18 +6,18 @@
   <!-- Hidden link to admin page (will not be visible or clickable) -->
   <a href="admin.html" style="display: none;">Admin Page</a>
   <!-- Fonts, CSS, etc. -->
-  <link rel="stylesheet" href="gangs.css" />
+  <link rel="stylesheet" href="styles/index.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 </head>
 
 <body class="background">
-  <a href="admin/admin.html" class="hidden-link">Admin Page</a>
+  <a href="admin.html" class="hidden-link">Admin Page</a>
   <!-- ======== LEFT SIDEBAR ======== -->
   <div class="sidebar">
     <!-- Sidebar image placeholder -->
-    <img src="detective.png" alt="Sidebar Placeholder" class="sidebar-image">
+    <img src="images/logos/detective.png" alt="Sidebar Placeholder" class="sidebar-image">
 
     <!-- Text beneath image -->
     <div class="sidebar-text">
@@ -32,9 +32,17 @@
         <a href="https://forum.gta.world/en/topic/78852-san-andreas-penal-code/" target="_blank">Penal Code</a>
         <a href="https://forum.gta.world/en/topic/71740-san-andreas-legislation-index/" target="_blank">Legislation Index</a>
         <a href="https://productofmymind.github.io/GTAW-CCTVs/" target="_blank">CCTV Map</a>
-        <!-- Added id to the Forum Drive Map link -->
-        <a href="https://i.imgur.com/xGdxtiC.png" id="forumDriveMap">Forum Drive Map</a>
-        <a href="#" id="latestMap">Gang Map</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropdown-btn">Maps</button>
+      <div class="dropdown-content">
+        <a href="#" id="latestMap">Gangs of Los Santos</a>
+        <a href="images/location maps/ForumDrive.png" id="forumDrive">Forum Drive</a>
+        <a href="images/location maps/Jamestown.png" id="jamestown">Jamestown</a>
+        <a href="images/location maps/Charleston.png" id="Charleston">Charleston</a>
+        <a href="images/location maps/MissionRow.png" id="missionrow">Mission Row Area</a>
       </div>
     </div>
     <!-- ======== END SIDEBAR ======== -->
@@ -47,29 +55,29 @@
   <div id="googleDropdown" class="google-dropdown-banner"></div>
 
   <!-- Top Logo -->
-  <img src="git.png" class="gitlogo" />
+  <img src="images/logos/git.png" class="gitlogo" />
 
   <div class="prdcontainer">
     <h1>GANG IMPACT TEAM</h1>
     <div class="git-container">
-      <a href="poi/poi.html" class="image-button">
-        <img src="thumbnails/person-of-interest.png" alt="poi">
+      <a href="poi.html" class="image-button">
+        <img src="images/thumbnails/person-of-interest.png" alt="poi">
         <p>Person of Interest</p>
       </a>
-      <a href="property/property.html" class="image-button">
-        <img src="thumbnails/property-of-interest.png" alt="poi2">
+      <a href="property.html" class="image-button">
+        <img src="images/thumbnails/property-of-interest.png" alt="poi2">
         <p>Property of Interest</p>
       </a>
-      <a href="fi-card/fic.html" class="image-button">
-        <img src="thumbnails/field-interview-card.png" alt="fic">
+      <a href="fic.html" class="image-button">
+        <img src="images/thumbnails/field-interview-card.png" alt="fic">
         <p>Field Interview Card</p>
       </a>
-      <a href="west-valley/west-valley.html" class="image-button">
-        <img src="thumbnails/ged-wva-ir.png" alt="wva">
+      <a href="west-valley.html" class="image-button">
+        <img src="images/thumbnails/ged-wva-ir.png" alt="wva">
         <p>West Valley Area Incident Report</p>
       </a>
-      <a href="ged-sca-ir.html" class="image-button">
-        <img src="thumbnails/ged-sca-ir.png" alt="scr">
+      <a href="south-central.html" class="image-button">
+        <img src="images/thumbnails/ged-sca-ir.png" alt="scr">
         <p>South Central Area Incident Report</p>
       </a>
     </div>
@@ -82,6 +90,6 @@
     </div>
   </div>
 
-  <script src="gangs.js"></script>
+  <script src="script/index.js"></script>
 </body>
 </html>
