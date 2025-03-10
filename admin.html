@@ -18,6 +18,7 @@
         </div>
         <div>
           <label for="image">Injunction Safetyzone:</label>
+          <p>Make sure the image is square. It will auto-resize to 500x500</p>
           <input type="file" id="image" name="image" accept="image/*" required>
         </div>
         <!-- New textarea for Injunction Description -->
@@ -30,6 +31,26 @@
     </div>
     <div id="status"></div>
   </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const injunctionDesc = document.getElementById('injunctionDesc');
+      if (injunctionDesc) {
+        const autoResize = () => {
+          // Reset height to allow shrinking
+          injunctionDesc.style.height = 'auto';
+          // Set height to scrollHeight (the full height of the content)
+          injunctionDesc.style.height = injunctionDesc.scrollHeight + 'px';
+        };
+  
+        // Listen for input events to adjust height as content changes
+        injunctionDesc.addEventListener('input', autoResize);
+        
+        // Trigger adjustment on load in case there's pre-filled content
+        autoResize();
+      }
+    });
+  </script>  
+
   <script>
     document.getElementById('sheetForm').addEventListener('submit', async function(e) {
       e.preventDefault();
