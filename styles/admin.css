@@ -104,6 +104,11 @@ h2 {
   color: #B9AA85;
 }
 
+p {
+  color: white;
+  font-size: 14px;
+}
+
 /* === SIDEBAR STYLES === */
 .sidebar {
   position: fixed;
@@ -281,7 +286,7 @@ body.background {
 }
 
 .admin-container button {
-  width: 100%;
+  width: 101%;
   padding: 10px;
   font-size: 1rem;
   background-color: #0C7A87;
@@ -337,4 +342,11 @@ body.background {
   background-color: #1392A0;
   border-color: #1392A0;
   transform: none;
+}
+
+#injunctionDesc {
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+  overflow: hidden;
 }
