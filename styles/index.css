@@ -98,10 +98,12 @@ html, body {
   /* Headings */
   h1 {
     color: #B9AA85;
+    text-shadow: 2px 2px 2px black;
   }
   
   h2 {
     color: #B9AA85;
+    text-shadow: 2px 2px 2px black;
   }
 
   /* === SIDEBAR STYLES === */
