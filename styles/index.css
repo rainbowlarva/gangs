@@ -140,6 +140,7 @@ body.background {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5rem;
+  text-shadow: 2px 2px 2px black;
 }
 
 /* Dropdown container inside the sidebar */
