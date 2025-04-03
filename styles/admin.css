@@ -2,7 +2,7 @@ html, body {
   width: 100%;
   margin: 0;
   overflow-y: auto;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -37,7 +37,7 @@ a {
   margin: 10px;
 }
   
-/* Various logos */
+/* Gang logo */
 .gitlogo {
   display: flex;
   justify-content: center;
@@ -152,7 +152,7 @@ body.background {
   width: 100%;
 }
 
-/* Dropdown button: full width, custom styling */
+/* Dropdown button */
 .dropdown-btn {
   width: 100%;
   background-color: #32383E;
@@ -176,7 +176,7 @@ body.background {
   margin-left: 5px;
 }
 
-/* Hidden dropdown content (animated) */
+/* Hidden dropdown content */
 .dropdown-content {
   max-height: 0;
   opacity: 0;
@@ -200,7 +200,7 @@ body.background {
   background-color: #545B60;
 }
 
-/* Expand the dropdown with smooth animation */
+/* Expand */
 .dropdown.active .dropdown-content {
   max-height: 500px;
   opacity: 1;
@@ -255,7 +255,7 @@ body.background {
   cursor: zoom-out;
 }
 
-/* === Admin Page Styles === */
+/* Admin Page Styles */
 .admin-container {
   width: 80%;
   max-width: 600px;
@@ -307,7 +307,7 @@ body.background {
   display: none;
 }
 
-/* Unchecked => #0C7A87 (lighter teal) */
+/* Unchecked */
 .checkbox-container label {
   align-items: center;
   justify-content: center;
@@ -318,21 +318,21 @@ body.background {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1.1rem;
-  user-select: none;  /* no text highlight */
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  color: white;       /* ensure text is visible on teal */
+  color: white;
 }
 
-/* Hover (unchecked) => no color change, slight scale */
+/* Hover */
 .checkbox-container label:hover {
-  background-color: #C10000; /* remain the same color on hover */
+  background-color: #C10000;
   border-color: #C10000;
   transform: scale(1.05);
 }
 
-/* Checked => #0A4C54 (darker teal), no transform on hover */
+/* Checked */
 .checkbox-container input[type="checkbox"]:checked + label {
   background-color: #1392A0;
   border-color: #1392A0;
