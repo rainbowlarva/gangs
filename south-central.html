@@ -15,13 +15,11 @@
     <h1>South Central Area Incident Report</h1>
 
     <form id="scrForm">
-      <!-- 1) Gangs Involved -->
       <div>
         <label for="gangsInvolved">Gang(s) Involved:</label>
         <input type="text" id="gangsInvolved" placeholder="e.g. Rollin' 60's Neighborhood Crips, etc." />
       </div>
 
-      <!-- 2) Supplementary IR Link & Title -->
       <div>
         <label for="suppUrl">Supplementary IR URL:</label>
         <input type="text" id="suppUrl" placeholder="Full link if IR is supplementary" />
@@ -31,25 +29,21 @@
         <input type="text" id="suppIrTitle" placeholder="#XXX" />
       </div>
 
-      <!-- 3) Spoiler Title -->
       <div>
         <label for="spoilerTitle">Spoiler Title (e.g. IR #1234):</label>
         <input type="text" id="spoilerTitle" placeholder="#XXX" />
       </div>
 
-      <!-- 4) Time and Date -->
       <div>
         <label for="timeDate">Time & Date:</label>
         <input type="text" id="timeDate" placeholder="e.g. 01/JAN/2025 15:00" />
       </div>
 
-      <!-- 5) Location -->
       <div>
         <label for="location">Location:</label>
         <input type="text" id="location" placeholder="Where the incident took place" />
       </div>
 
-      <!-- 6) Employee Name and Department Rank -->
       <div>
         <label for="employeeName">Employee Full Name:</label>
         <input type="text" id="employeeName" placeholder="Your full name" />
@@ -59,30 +53,25 @@
         <input type="text" id="departmentRank" placeholder="Your rank (e.g. Officer II)" />
       </div>
 
-      <!-- 7) Narrative -->
       <div>
         <label for="narrative">Narrative:</label>
         <textarea id="narrative" rows="4" placeholder="Describe what happened..."></textarea>
       </div>
 
-      <!-- 8) Attachments -->
       <div>
         <label for="attachments">Attachments:</label>
         <textarea id="attachments" rows="2" placeholder="Any extra references or evidence"></textarea>
       </div>
 
-      <!-- 9) Employee Signature -->
       <div>
         <label for="employeeSig">Employee Signature:</label>
         <input type="text" id="employeeSig" placeholder="Your signature or name" />
       </div>
 
-      <!-- Clear & Generate -->
       <button type="button" id="clearButton" class="clear-button">Clear</button>
       <button type="submit">Generate BBCode</button>
     </form>
 
-    <!-- Output Area -->
     <div id="bbcodeOutput">
       <h2>Generated BBCode:</h2>
       <pre id="bbcodeText"></pre>
