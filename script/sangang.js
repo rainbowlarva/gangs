@@ -151,14 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr><td colspan="2" style="font-size: 14px;">${criteria}</td></tr>
 
     <tr>
+      <th style="font-weight: bold; font-size: 10px; width: 70%;">THREAT EXPLANATION</th>  
       <th style="font-weight: bold; font-size: 10px; width: 30%;">THREAT LEVEL</th>
-      <th style="font-weight: bold; font-size: 10px; width: 70%;">THREAT EXPLANATION</th>
     </tr>
     <tr>
-<td style="font-size: 14px; font-weight: bold;">
-  <span style="color: ${threatColor};">${threatLevel}</span>
-</td>
-<td style="font-size: 14px;">${threatExplanation}</td>
+    <td style="font-size: 14px;">${threatExplanation}</td>
+      <td style="font-size: 14px; font-weight: bold;">
+        <span style="color: ${threatColor};">${threatLevel}</span>
+      </td>
     </tr>
 
     <tr><th colspan="2" style="font-weight: bold; font-size: 10px;">EVIDENCE</th></tr>
