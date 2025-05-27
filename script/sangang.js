@@ -203,3 +203,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// --- Tutorial Overlay Logic ---
+function showTutorial() {
+  document.getElementById('tutorialOverlay').style.display = 'flex';
+}
+function hideTutorial() {
+  document.getElementById('tutorialOverlay').style.display = 'none';
+}
+
+// Show only on first visit in this browser
+window.addEventListener('DOMContentLoaded', function() {
+  if (!localStorage.getItem('sangangTutorialSeen')) {
+    showTutorial();
+    localStorage.setItem('sangangTutorialSeen', 'yes');
+  }
+  document.getElementById('tutorialBtn').onclick = function(e) {
+    e.preventDefault();
+    showTutorial();
+  };
+  // Click outside the modal closes overlay
+  document.getElementById('tutorialOverlay').onclick = function(e) {
+    if (e.target === this) { // Only if clicking the overlay itself, not inside content
+      hideTutorial();
+    }
+  };
+  // Prevent click-inside from bubbling to overlay
+  document.getElementById('tutorialWindow').onclick = function(e) {
+    e.stopPropagation();
+  };
+});
