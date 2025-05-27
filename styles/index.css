@@ -2,7 +2,7 @@ html, body {
   width: 100%;
   margin: 0;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -37,7 +37,7 @@ html, body {
     margin: 10px;
   }
   
-  /* Gang logo */
+  /* Various logos */
   .gitlogo {
     display: flex;
     justify-content: center;
@@ -98,12 +98,10 @@ html, body {
   /* Headings */
   h1 {
     color: #B9AA85;
-    text-shadow: 2px 2px 2px black;
   }
   
   h2 {
     color: #B9AA85;
-    text-shadow: 2px 2px 2px black;
   }
 
   /* === SIDEBAR STYLES === */
@@ -140,7 +138,6 @@ body.background {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5rem;
-  text-shadow: 2px 2px 2px black;
 }
 
 /* Dropdown container inside the sidebar */
@@ -150,7 +147,7 @@ body.background {
   width: 100%;
 }
 
-/* Dropdown button */
+/* Dropdown button: full width, custom styling */
 .dropdown-btn {
   width: 100%;
   background-color: #32383E;
@@ -174,7 +171,7 @@ body.background {
   margin-left: 5px;
 }
 
-/* Hidden dropdown content */
+/* Hidden dropdown content (animated) */
 .dropdown-content {
   max-height: 0;
   opacity: 0;
@@ -198,7 +195,7 @@ body.background {
   background-color: #545B60;
 }
 
-/* Expand the dropdown */
+/* Expand the dropdown with smooth animation */
 .dropdown.active .dropdown-content {
   max-height: 500px;
   opacity: 1;
@@ -214,7 +211,7 @@ body.background {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10002;
+  z-index: 10002; /* Increased z-index to cover the banner */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -257,7 +254,7 @@ body.background {
 .google-banner {
   position: fixed;
   top: 0;
-  left: 250px;
+  left: 250px; /* start after the sidebar */
   width: calc(200px);
   background-color: #FFD800;
   color: black;
@@ -276,15 +273,15 @@ body.background {
 
 .google-dropdown-banner {
   position: fixed;
-  top: 39px;
+  top: 39px; /* adjust based on the banner height */
   left: 250px;
   width: calc(600px);
-  max-height: 0;
+  max-height: 0; /* collapsed initially */
   overflow: hidden;
   background-color: #475056;
   color: #B9AA85;
   border: 5px solid #32383E;
-  padding: 0 10px;
+  padding: 0 10px; /* no vertical padding initially */
   z-index: 10000;
   box-sizing: border-box;
   box-shadow: 0 0 5px #000000;
@@ -293,8 +290,8 @@ body.background {
 }
 
 .google-dropdown-banner.open {
-  max-height: 640px; 
-  padding: 10px;   
+  max-height: 640px; /* adjust to the desired expanded height */
+  padding: 10px;    /* add vertical padding when open */
   opacity: 1;
 }
 

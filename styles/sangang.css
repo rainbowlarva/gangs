@@ -161,3 +161,40 @@ body {
     height: auto; /* Maintain aspect ratio */
     cursor: pointer; /* Change cursor to indicate it's clickable */
 }
+
+p {
+  color: white;
+  font-size: 14px;
+}
+
+ul {
+  color: white;
+  font-size: 14px;
+}
+
+#threatLevel {
+  border-radius: 5px;
+  height: 30px;
+  background-color: #545454;
+  border: 10px;
+  border-color: #212121;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+#threatLevel.low {
+  background-color: #ffff66; /* yellow */
+  color: black;
+}
+#threatLevel.medium {
+  background-color: #ff9933; /* orange */
+  color: white;
+}
+#threatLevel.high {
+  background-color: #cc3333; /* red */
+  color: white;
+}
+
+pre strong {
+  font-weight: bold;
+}

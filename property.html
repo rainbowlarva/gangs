@@ -3,21 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Property of Interest</title>
-  <link rel="stylesheet" href="styles/property.css">
+  <link rel="stylesheet" href="styles/property.css"> <!-- Same style approach -->
 </head>
 <body>
   <div class="container">
     <h1>Property of Interest</h1>
 
+    <!-- Optional back button, remove if not needed -->
     <a href="https://rainbowlarva.github.io/gangs/">
         <img src="images/arrow.png" alt="Back" class="back-button">
     </a>
+    <!-- The Form -->
     <form id="propertyForm">
+      <!-- 1) Address Input -->
       <div>
         <label for="address">Address:</label>
         <input type="text" id="address" placeholder="Enter property address" />
       </div>
 
+      <!-- 2) Property Type checkboxes (Business, Residence, Storage, Other) -->
       <h2>Property Type</h2>
       <div class="checkbox-container property-type">
         <input type="checkbox" id="businessCheck" />
@@ -32,11 +36,13 @@
         <input type="checkbox" id="otherCheck" />
         <label for="otherCheck">Other</label>
       </div>
+      <!-- Extra input for "Other" property type -->
       <div id="otherTypeContainer" style="display: none;">
         <label for="otherType">Specify Other Type:</label>
         <input type="text" id="otherType" placeholder="e.g. Warehouse, Barn, etc." />
       </div>
 
+      <!-- 3) Business Licenses Input -->
       <div>
         <label for="businessLicenses">Business License(s):</label>
         <input type="text" id="businessLicenses" placeholder="Enter any business licenses (if applicable)" />
@@ -44,6 +50,7 @@
 
       <hr />
 
+      <!-- 4) Occupants Section -->
       <h2>Occupants</h2>
       <div>
         <label for="ownerName">Owner Name:</label>
@@ -59,6 +66,7 @@
 
       <hr />
 
+      <!-- 5) Attachments Section -->
       <h2>Attachments</h2>
       <div>
         <label for="propertyPhoto">Property Photo(s) URL:</label>
@@ -69,16 +77,19 @@
         <textarea id="otherAttachments" rows="3" placeholder="Any additional info or attachments"></textarea>
       </div>
 
+      <!-- Clear & Generate Buttons -->
       <button type="button" id="clearButton" class="clear-button">Clear</button>
       <button type="submit">Generate BBCode</button>
     </form>
 
+    <!-- Output -->
     <div id="bbcodeOutput">
       <h2>Generated BBCode:</h2>
       <pre id="bbcodeText"></pre>
     </div>
   </div>
 
+  <!-- The JavaScript -->
   <script src="script/property.js"></script>
 </body>
 </html>
