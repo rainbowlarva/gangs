@@ -138,8 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
 <div style="padding: 2px; border: 1px solid #000; background-color: white; width: 100%; max-width: 210mm; color: black; font-family: Arial, sans-serif;">
   <h1 style="text-align: center; font-size: 16px; font-weight: bold; margin-top: 10px;">LOS SANTOS POLICE DEPARTMENT<br>GANG DESIGNATION REPORT</h1>
   <table border="1" cellpadding="2" style="width:100%; border-collapse: collapse; color: black;">
-    <tr><th style="font-weight: bold; font-size: 10px;">FILING OFFICER</th><th style="font-weight: bold; font-size: 10px;">DATE</th></tr>
-    <tr><td style="font-size: 14px; text-transform: uppercase;">${officer}</td><td style="font-size: 14px; text-transform: uppercase;">${date}</td></tr>
+    <tr>
+      <th style="font-weight: bold; font-size: 10px; width: 70%;">FILING OFFICER</th>
+      <th style="font-weight: bold; font-size: 10px; width: 30%;">DATE</th>
+    </tr>
+    <tr>
+      <td style="font-size: 14px; text-transform: uppercase; width: 70%;">${officer}</td>
+      <td style="font-size: 14px; text-transform: uppercase; width: 30%;">${date}</td>
+    </tr>
 
     <tr><th colspan="2" style="font-weight: bold; font-size: 10px;">CRITERIA</th></tr>
     <tr><td colspan="2" style="font-size: 14px;">${criteria}</td></tr>
