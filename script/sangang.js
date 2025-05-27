@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Utility to replace newlines with <br>
+  function nl2br(str) {
+    if (!str) return '';
+    return str.replace(/\n/g, '<br>');
+  }
+
+  // Auto-resize textareas
+  function autoResizeTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+  document.querySelectorAll('textarea').forEach(textarea => {
+    textarea.addEventListener('input', function() {
+      autoResizeTextarea(this);
+    });
+    autoResizeTextarea(textarea);
+  });
+
   const officerRank = document.getElementById('officerRank');
   const officerName = document.getElementById('officerName');
   const officerBadge = document.getElementById('officerBadge');
@@ -83,11 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const officer = `${officerRank.value.trim() || 'N/A'} ${officerName.value.trim() || 'N/A'} (Badge #${officerBadge.value.trim() || 'N/A'})`;
     const date = (document.getElementById('date')?.value || 'N/A').trim();
-    const criteria = (document.getElementById('criteria')?.value || 'N/A').trim();
-    const evidence = (document.getElementById('evidence')?.value || 'N/A').trim();
+    const criteria = nl2br((document.getElementById('criteria')?.value || 'N/A').trim());
+    const evidence = nl2br((document.getElementById('evidence')?.value || 'N/A').trim());
     const threatLevel = document.getElementById('threatLevel')?.value || 'N/A';
-    const threatExplanation = (document.getElementById('threatExplanation')?.value || 'N/A').trim();
-    const physicalDescription = (document.getElementById('physicalDescription')?.value || 'N/A').trim();
+    const threatExplanation = nl2br((document.getElementById('threatExplanation')?.value || 'N/A').trim());
+    const physicalDescription = nl2br((document.getElementById('physicalDescription')?.value || 'N/A').trim());
     const screenshots = getScreenshotURLs();
     const attachments = getAttachmentURLs();
 
@@ -127,12 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr><td colspan="2" style="font-size: 14px;">${criteria}</td></tr>
 
     <tr>
-          <th style="font-weight: bold; font-size: 10px;">EXPLANATION</th>
-      <th style="font-weight: bold; font-size: 10px;">THREAT LEVEL</th>
+      <th style="font-weight: bold; font-size: 10px; width: 30%;">THREAT LEVEL</th>
+      <th style="font-weight: bold; font-size: 10px; width: 70%;">THREAT EXPLANATION</th>
     </tr>
     <tr>
-      <td style="font-size: 14px;">${threatExplanation}</td>
       <td style="font-size: 14px; color: ${threatColor}; font-weight: bold;">${threatLevel}</td>
+      <td style="font-size: 14px;">${threatExplanation}</td>
     </tr>
 
     <tr><th colspan="2" style="font-weight: bold; font-size: 10px;">EVIDENCE</th></tr>
