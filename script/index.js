@@ -1,15 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.generator-card').forEach(card => {
-    card.addEventListener('click', function() {
-      if (typeof gtag === "function") {
-        const gen = card.querySelector('span').innerText.trim();
-        gtag('event', 'generator_used', {
-          'event_category': 'Generators',
-          'event_label': gen
-        });
-      }
-    });
-  });
 
   const dropdowns = document.querySelectorAll('.dropdown');
   dropdowns.forEach(dropdown => dropdown.classList.add('active'));
