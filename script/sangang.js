@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Utility to replace newlines with <br>
   function nl2br(str) {
     if (!str) return '';
     return str.replace(/\n/g, '<br>');
   }
 
-  // Auto-resize textareas
   function autoResizeTextarea(textarea) {
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
@@ -46,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const output = document.getElementById('htmlText');
   const clearBtn = document.getElementById('clearButton');
 
-  // Screenshot logic
   function addScreenshotField() {
     const container = document.getElementById('screenshotList');
     const input = document.createElement('input');
@@ -67,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return Array.from(inputs).map(input => input.value.trim()).filter(Boolean);
   }
 
-  // Attachments logic
   function addAttachmentField() {
     const container = document.getElementById('attachmentList');
     const input = document.createElement('input');
@@ -88,11 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return Array.from(inputs).map(input => input.value.trim()).filter(Boolean);
   }
 
-  // Add listeners for attachments
   document.getElementById('addAttachment').addEventListener('click', addAttachmentField);
   document.getElementById('removeAttachment').addEventListener('click', removeAttachmentField);
 
-  // Screenshot listeners
   document.getElementById('addScreenshot').addEventListener('click', addScreenshotField);
   document.getElementById('removeScreenshot').addEventListener('click', removeScreenshotField);
 
@@ -124,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         threatColor = '#000000';
     }
 
-    // Compose the attachments section
     const attachmentsHtml = attachments.length
       ? `<tr><th colspan="2" style="font-weight: bold; font-size: 10px;">ATTACHMENTS</th></tr>
          <tr><td colspan="2" style="font-size: 14px;">
@@ -175,16 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 `;
 
-    // Output as raw code
     output.textContent = html;
 
-    // Live preview below
     const preview = document.getElementById('htmlPreview');
     if (preview) {
       preview.innerHTML = "<h2>Preview:</h2>" + html;
     }
 
-    // Select for easy copying
     const range = document.createRange();
     range.selectNodeContents(output);
     const selection = window.getSelection();
@@ -204,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// --- Tutorial Overlay Logic ---
 function showTutorial() {
   document.getElementById('tutorialOverlay').style.display = 'flex';
 }
@@ -212,7 +201,6 @@ function hideTutorial() {
   document.getElementById('tutorialOverlay').style.display = 'none';
 }
 
-// Show only on first visit in this browser
 window.addEventListener('DOMContentLoaded', function() {
   if (!localStorage.getItem('sangangTutorialSeen')) {
     showTutorial();
@@ -222,13 +210,11 @@ window.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
     showTutorial();
   };
-  // Click outside the modal closes overlay
   document.getElementById('tutorialOverlay').onclick = function(e) {
-    if (e.target === this) { // Only if clicking the overlay itself, not inside content
+    if (e.target === this) {
       hideTutorial();
     }
   };
-  // Prevent click-inside from bubbling to overlay
   document.getElementById('tutorialWindow').onclick = function(e) {
     e.stopPropagation();
   };

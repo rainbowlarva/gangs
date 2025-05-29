@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <title>Person of Interest</title>
+  <link rel="stylesheet" href="styles/poi.css" />
+</head>
 <body class="background">
   <a href="https://rainbowlarva.github.io/gangs/">
     <img src="images/arrow.png" alt="Back" class="back-button">
@@ -9,7 +13,6 @@
     <h1>Person of Interest Report</h1>
 
     <form id="poiForm">
-      <!-- Basic Fields -->
       <div>
         <label for="poiName">Name:</label>
         <input type="text" id="poiName" placeholder="Subject name." />
@@ -47,7 +50,6 @@
         <input type="text" id="affiliation" placeholder="Subject's affiliation." />
       </div>
 
-      <!-- Status (Three Checkboxes) -->
       <h2>Status</h2>
       <div class="checkbox-container status-checks">
         <input type="checkbox" id="aliveCheck" />
@@ -60,7 +62,6 @@
         <label for="unknownCheck">Unknown</label>
       </div>
 
-      <!-- Dynamic Lists -->
       <h2>Known Properties</h2>
       <div id="propertiesList" class="list-container"></div>
       <div class="button-row">
@@ -89,12 +90,10 @@
         <button type="button" id="removeCase">Remove Casefile</button>
       </div>
 
-      <!-- Generate & Clear Buttons -->
       <button type="button" id="clearButton" class="clear-button">Clear</button>
       <button type="submit">Generate BBCode</button>
     </form>
 
-    <!-- Output Area -->
     <div id="bbcodeOutput">
       <h2>Generated BBCode:</h2>
       <pre id="bbcodeText"></pre>

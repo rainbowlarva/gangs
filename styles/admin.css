@@ -2,7 +2,7 @@ html, body {
   width: 100%;
   margin: 0;
   overflow-y: auto;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -31,13 +31,11 @@ a {
   padding-bottom: 5%;
 }
   
-/* Top logo */
 .prdcontainer img {
   display: inline-block;
   margin: 10px;
 }
   
-/* Various logos */
 .gitlogo {
   display: flex;
   justify-content: center;
@@ -47,7 +45,6 @@ a {
   height: 300px;
 }
   
-/* Container boxes for each section */
 .git-container {
   display: flex;
   flex-wrap: wrap;
@@ -63,7 +60,6 @@ a {
   padding: 20px;
 }
   
-/* Grayscale + hover scale */
 .image-button {
   filter: grayscale(100%);
   text-align: center;
@@ -95,7 +91,6 @@ a {
   color: #DBDBDB;
 }
   
-/* Headings */
 h1 {
   color: #B9AA85;
 }
@@ -109,7 +104,6 @@ p {
   font-size: 14px;
 }
 
-/* === SIDEBAR STYLES === */
 .sidebar {
   position: fixed;
   left: 0;
@@ -124,12 +118,10 @@ p {
   z-index: 9999;
 }
 
-/* Shift main content to the right of the sidebar */
 body.background {
   margin-left: 250px;
 }
 
-/* Sidebar image placeholder */
 .sidebar-image {
   width: 100%;
   height: auto;
@@ -137,7 +129,6 @@ body.background {
   margin-bottom: 10px;
 }
 
-/* Sidebar text beneath image */
 .sidebar-text {
   color: #A89D8F;
   text-align: center;
@@ -145,14 +136,12 @@ body.background {
   font-size: 1.5rem;
 }
 
-/* Dropdown container inside the sidebar */
 .dropdown {
   margin-bottom: 10px;
   position: relative;
   width: 100%;
 }
 
-/* Dropdown button: full width, custom styling */
 .dropdown-btn {
   width: 100%;
   background-color: #32383E;
@@ -176,7 +165,6 @@ body.background {
   margin-left: 5px;
 }
 
-/* Hidden dropdown content (animated) */
 .dropdown-content {
   max-height: 0;
   opacity: 0;
@@ -188,7 +176,6 @@ body.background {
   border-radius: 0;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   display: block;
   color: #fff;
@@ -200,7 +187,6 @@ body.background {
   background-color: #545B60;
 }
 
-/* Expand the dropdown with smooth animation */
 .dropdown.active .dropdown-content {
   max-height: 500px;
   opacity: 1;
@@ -255,7 +241,6 @@ body.background {
   cursor: zoom-out;
 }
 
-/* === Admin Page Styles === */
 .admin-container {
   width: 80%;
   max-width: 600px;
@@ -302,12 +287,10 @@ body.background {
   background-color: #0A4C54;
 }
 
-/* Hide the original checkbox */
 .checkbox-container input[type="checkbox"] {
   display: none;
 }
 
-/* Unchecked => #0C7A87 (lighter teal) */
 .checkbox-container label {
   align-items: center;
   justify-content: center;
@@ -322,17 +305,15 @@ body.background {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  color: white;       /* ensure text is visible on teal */
+  color: white;
 }
 
-/* Hover (unchecked) => no color change, slight scale */
 .checkbox-container label:hover {
-  background-color: #C10000; /* remain the same color on hover */
+  background-color: #C10000;
   border-color: #C10000;
   transform: scale(1.05);
 }
 
-/* Checked => #0A4C54 (darker teal), no transform on hover */
 .checkbox-container input[type="checkbox"]:checked + label {
   background-color: #1392A0;
   border-color: #1392A0;
@@ -346,7 +327,7 @@ body.background {
 
 #injunctionDesc {
   width: 100%;
-  min-height: 100px;  /* Adjust this value as needed */
-  resize: none;       /* Prevent manual resizing */
-  overflow: hidden;   /* Hide scrollbars so that height is controlled by the content */
+  min-height: 100px;
+  resize: none;      
+  overflow: hidden;   
 }
