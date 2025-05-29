@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.generator-card').forEach(card => {
+  card.addEventListener('click', function() {
+    if (typeof gtag === "function") {
+      const gen = card.querySelector('span').innerText.trim();
+      gtag('event', 'generator_used', {
+        'event_category': 'Generators',
+        'event_label': gen
+      });
+    }
+  });
+});
   // --- Sidebar Dropdowns ---
   // Make all dropdowns open by default
   const dropdowns = document.querySelectorAll('.dropdown');
