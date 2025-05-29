@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   const dropdowns = document.querySelectorAll('.dropdown');
   dropdowns.forEach(dropdown => dropdown.classList.add('active'));
 
@@ -11,58 +10,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-const modalOverlay = document.getElementById('modalOverlay');
-const modalImage = document.getElementById('modalImage');
-const modalImageWrapper = document.querySelector('.modal-image-interactive');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalImage = document.getElementById('modalImage');
+  const modalImageWrapper = document.querySelector('.modal-image-interactive');
 
-let panzoomInstance = null;
+  let panzoomInstance = null;
 
-function showModal(imageUrl) {
-  modalImage.setAttribute('src', imageUrl);
-  modalOverlay.classList.add('open');
+  function showModal(imageUrl, enablePanzoom = false) {
+    modalImage.setAttribute('src', '');
+    modalImage.setAttribute('src', imageUrl);
+    modalOverlay.classList.add('open');
 
-  modalImage.onload = () => {
     if (panzoomInstance) {
       panzoomInstance.destroy();
       panzoomInstance = null;
     }
-    panzoomInstance = panzoom(modalImage, {
-      maxScale: 8,
-      minScale: 1,
-      contain: 'inside',
-      animate: true
-    });
-    modalImage.onwheel = null;
-    modalImage.addEventListener('wheel', panzoomInstance.zoomWithWheel, { passive: false });
-  };
-}
 
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) {
-    modalOverlay.classList.remove('open');
-    if (panzoomInstance) {
-      panzoomInstance.destroy();
-      panzoomInstance = null;
-    }
+    modalImage.onload = () => {
+      if (enablePanzoom) {
+        panzoomInstance = panzoom(modalImage, {
+          maxScale: 8,
+          minScale: 1,
+          contain: 'inside',
+          animate: true
+        });
+        modalImage.onwheel = null;
+        modalImage.addEventListener('wheel', panzoomInstance.zoomWithWheel, { passive: false });
+      } else {
+        modalImage.style.transform = '';
+        modalImage.onwheel = null;
+      }
+    };
   }
-});
 
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) {
-    modalOverlay.classList.remove('open');
-    if (panzoomInstance) {
-      panzoomInstance.destroy();
-      panzoomInstance = null;
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.classList.remove('open');
+      if (panzoomInstance) {
+        panzoomInstance.destroy();
+        panzoomInstance = null;
+      }
+      modalImage.setAttribute('src', '');
     }
-  }
-});
+  });
 
-
-  const forumDriveMapLink = document.getElementById('forumDrive');
-  forumDriveMapLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    const imageUrl = forumDriveMapLink.getAttribute('href');
-    showModal(imageUrl);
+  // ALL STATIC MAPS
+  const staticMapLinkIds = ['forumDrive', 'jamestown', 'Charleston', 'missionrow'];
+  staticMapLinkIds.forEach(id => {
+    const link = document.getElementById(id);
+    if (link) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const imageUrl = link.getAttribute('href');
+        showModal(imageUrl, false);
+      });
+    }
   });
 
   async function fetchAlbumImages(albumId) {
@@ -82,34 +84,12 @@ modalOverlay.addEventListener('click', (e) => {
       const images = await fetchAlbumImages('uQyYFzW');
       if (images.length > 0) {
         const lastImage = images[images.length - 1];
-        showModal(lastImage.link);
+        showModal(lastImage.link, true); // Panzoom ENABLED
       } else {
         console.error('No images found in album');
       }
     } catch (err) {
       console.error('Error fetching album images:', err);
-    }
-  });
-
-  const additionalMapLinkIds = ['jamestown', 'Charleston', 'missionrow'];
-  additionalMapLinkIds.forEach(id => {
-    const link = document.getElementById(id);
-    if (link) {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const imageUrl = link.getAttribute('href');
-        showModal(imageUrl);
-      });
-    }
-  });
-
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      modalOverlay.classList.remove('open');
-      if (panzoomInstance) {
-        panzoomInstance.destroy();
-        panzoomInstance = null;
-      }
     }
   });
 
@@ -120,13 +100,9 @@ modalOverlay.addEventListener('click', (e) => {
     googleDropdown.classList.toggle('open');
 
     const callbackName = 'handleGoogleContent_' + Date.now();
-    console.log("Callback name:", callbackName);
-
     let script = document.createElement('script');
 
     window[callbackName] = function(data) {
-      console.log("Received Data:", data);
-
       if (data.name && data.imageUrl.startsWith("http")) {
         googleDropdown.innerHTML = `
           <div class="injunction-content">
@@ -145,7 +121,6 @@ modalOverlay.addEventListener('click', (e) => {
     };
 
     const url = `https://script.google.com/macros/s/AKfycbzvCS0IKhffdKDyAiOxuPw10SJZ_ebwZoxqY7w3guuF60zBdUFEnK8TxxBfK9iuV_2A/exec?callback=${callbackName}`;
-    console.log("Requesting JSONP from:", url);
     script.src = url;
     document.body.appendChild(script);
   });
