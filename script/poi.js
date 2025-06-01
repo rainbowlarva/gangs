@@ -161,18 +161,18 @@ function generateBBCode(event) {
     );
   }
 
-  if (associates.length > 0) {
-    const lines = associates.map(item => `[*] ${item}`).join('\n');
-    finalText = finalText.replace(
-      /(\[b\]Known Associates:\[\/b\]:\s*\[list\]\s*\[\*\]\s*)NAMEHERE(\s*\[\/list\])/,
-      `$1${lines}$2`
-    );
-  } else {
-    finalText = finalText.replace(
-      /(\[b\]Known Associates:\[\/b\]:\s*\[list\]\s*\[\*\]\s*)NAMEHERE(\s*\[\/list\])/,
-      `$1[*] N/A$2`
-    );
-  }
+if (associates.length > 0) {
+  const lines = associates.map(item => `[*] ${item}`).join('\n');
+  finalText = finalText.replace(
+    /\[b\]Known Associates:\[\/b\]:\s*\[list\]\s*\[\*\] NAMEHERE\s*\[\/list\]/,
+    `[b]Known Associates:[/b]:\n[list]\n${lines}\n[/list]`
+  );
+} else {
+  finalText = finalText.replace(
+    /\[b\]Known Associates:\[\/b\]:\s*\[list\]\s*\[\*\] NAMEHERE\s*\[\/list\]/,
+    `[b]Known Associates:[/b]:\n[list]\n[*] N/A\n[/list]`
+  );
+}
 
   if (cases.length > 0) {
     const lines = cases.map(item => `[*] ${item}`).join('\n');
