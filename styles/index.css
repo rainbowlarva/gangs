@@ -493,3 +493,51 @@ body.background {
   margin: 0 auto 18px auto;
   object-fit: contain;
 }
+
+.updates-section {
+  background: rgba(44, 48, 56, 0.74);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 40px auto 60px auto;
+  max-width: 800px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.2);
+  color: #e0e0e0;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid #2a2e33;
+}
+
+.updates-title {
+  font-size: 1.5rem;
+  color: #B9AA85;
+  margin-bottom: 16px;
+  text-align: center;
+  border-bottom: 1px solid #3a3f47;
+  padding-bottom: 6px;
+}
+
+.updates-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.updates-list li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #444;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.updates-list li:last-child {
+  border-bottom: none;
+}
+
+.updates-list a {
+  color: #aca79a;
+  text-decoration: none;
+}
+
+.updates-list a:hover {
+  color: #a39a81; /* Optional: hover color */
+  text-decoration: underline; /* Optional: hover effect */
+}
