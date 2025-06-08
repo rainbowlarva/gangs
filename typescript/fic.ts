@@ -28,7 +28,7 @@ NAMEHERE
 function getGangMemberBBCode() {
   const gangCheck = document.getElementById('gangCheck').checked;
   return gangCheck 
-    ? `[cbc] [b]§ 305 GANG MEMBER[/b]`
+    ? `[cbx] [b]§ 305 GANG MEMBER[/b]`
     : `[cb] [b]§ 305 GANG MEMBER[/b]`;
 }
 
@@ -39,11 +39,11 @@ function getCircumstanceBBCode() {
   const circOther  = document.getElementById('circOtherCheck').checked;
   const circOtherValue = document.getElementById('circOtherInput').value.trim();
 
-  const cConsensual = consensual ? `[cbc]CONSENSUAL` : `[cb]CONSENSUAL`;
-  const cDetain     = detain     ? `[cbc]DETAIN`    : `[cb]DETAIN`;
-  const cArrest     = arrest     ? `[cbc]ARREST`    : `[cb]ARREST`;
+  const cConsensual = consensual ? `[cbx]CONSENSUAL` : `[cb]CONSENSUAL`;
+  const cDetain     = detain     ? `[cbx]DETAIN`    : `[cb]DETAIN`;
+  const cArrest     = arrest     ? `[cbx]ARREST`    : `[cb]ARREST`;
   const cOther      = circOther  
-    ? `[cbc]OTHER: ${circOtherValue || 'N/A'}`
+    ? `[cbx]OTHER: ${circOtherValue || 'N/A'}`
     : `[cb]OTHER`;
 
   return `${cConsensual} / ${cDetain} / ${cArrest} / ${cOther}`;
@@ -78,7 +78,7 @@ function generateBBCode(event) {
   const serialNo    = document.getElementById('serialNo').value.trim()    || 'N/A';
   const subjectName = document.getElementById('subjectName').value.trim() || 'N/A';
 
-  const gangLine    = getGangMemberBBCode();
+  const gangLine    = getGangMemberBBCode(); // [cbx] or [cb]
   const circumstanceLine = getCircumstanceBBCode();
 
   const personsWithSubject = document.getElementById('personsWithSubject').value.trim() || 'N/A';

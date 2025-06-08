@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const officerName = document.getElementById('officerName');
   const officerBadge = document.getElementById('officerBadge');
 
+  officerRank.value = localStorage.getItem('officerRank') || '';
+  officerName.value = localStorage.getItem('officerName') || '';
+  officerBadge.value = localStorage.getItem('officerBadge') || '';
+
+  officerRank.addEventListener('input', () => localStorage.setItem('officerRank', officerRank.value));
+  officerName.addEventListener('input', () => localStorage.setItem('officerName', officerName.value));
+  officerBadge.addEventListener('input', () => localStorage.setItem('officerBadge', officerBadge.value));
+
   const threatLevelSelect = document.getElementById('threatLevel');
 
   function updateThreatColor() {
@@ -206,5 +214,8 @@ window.addEventListener('DOMContentLoaded', function() {
     if (e.target === this) {
       hideTutorial();
     }
+  };
+  document.getElementById('tutorialWindow').onclick = function(e) {
+    e.stopPropagation();
   };
 });
