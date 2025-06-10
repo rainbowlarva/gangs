@@ -541,3 +541,89 @@ body.background {
   color: #a39a81; /* Optional: hover color */
   text-decoration: underline; /* Optional: hover effect */
 }
+
+.utc-time-container {
+  text-align: center;
+  color: #e6e6e6;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+#nameAndSerial p {
+  margin: 0 0 5px;
+}
+
+#officerDisplay {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  margin: 8px auto 0 auto;  /* Centered horizontally */
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  width: fit-content;
+  text-align: left;
+}
+
+#officerDisplay p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #bbbbbb;
+  white-space: nowrap;
+}
+
+#officerDisplay strong {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+#officerForm input[type="text"],
+#officerForm select#officerRank {
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 8px;
+  background-color: #383c42; /* slightly lighter than #2c2f35 */
+  color: #e0e0e0;
+  border: 1px solid #4a4f55;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#officerForm input[type="text"]:focus,
+#officerForm select#officerRank:focus {
+  outline: none;
+  background-color: #41454b;
+  border-color: #6a6f77;
+}
+
+#officerForm select#officerRank {
+    cursor: pointer;
+}
+
+#saveOfficerInfo {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 10px;
+  background-color: #2c2f35;
+  color: #e0e0e0;
+  border: 1px solid #3a3d42;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#saveOfficerInfo:hover {
+  background-color: #35383f;
+  border-color: #505358;
+}
+
+#saveOfficerInfo:active {
+  background-color: #1e1f22;
+  border-color: #505358;
+}

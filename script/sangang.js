@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const officerRank = document.getElementById('officerRank');
   const officerName = document.getElementById('officerName');
-  const officerBadge = document.getElementById('officerBadge');
+  const serialNumber = document.getElementById('serialNumber');
 
   const threatLevelSelect = document.getElementById('threatLevel');
 
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const officer = `${officerRank.value.trim() || 'N/A'} ${officerName.value.trim() || 'N/A'} (Badge #${officerBadge.value.trim() || 'N/A'})`;
+    const officer = `${officerRank.value.trim() || 'N/A'} ${officerName.value.trim() || 'N/A'} (Badge #${serialNumber.value.trim() || 'N/A'})`;
     const date = (document.getElementById('date')?.value || 'N/A').trim();
     const criteria = nl2br((document.getElementById('criteria')?.value || 'N/A').trim());
     const evidence = nl2br((document.getElementById('evidence')?.value || 'N/A').trim());

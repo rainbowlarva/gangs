@@ -125,3 +125,77 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(script);
   });
 });
+
+function updateUtcTime() {
+  const now = new Date();
+  const utcString = now.toISOString().split("T")[1].split(".")[0]; // HH:MM:SS
+  const timeElement = document.getElementById("utcTime");
+  if (timeElement) {
+    timeElement.textContent = utcString;
+  }
+}
+
+setInterval(updateUtcTime, 1000);
+updateUtcTime();
+
+const saveButton = document.getElementById('saveOfficerInfo');
+const officerNameInput = document.getElementById('officerName');
+const serialNumberInput = document.getElementById('serialNumber');
+const officerRankSelect = document.getElementById('officerRank');
+const displayOfficerName = document.getElementById('displayOfficerName');
+const displaySerialNumber = document.getElementById('displaySerialNumber');
+const displayOfficerRank = document.getElementById('displayOfficerRank');
+const officerForm = document.getElementById('officerForm');
+const officerDisplay = document.getElementById('officerDisplay');
+
+function saveOfficerData(name, serial, rank) {
+  ['officerName', 'employeeName'].forEach(key => localStorage.setItem(key, name));
+  ['serialNo', 'officerBadge'].forEach(key => localStorage.setItem(key, serial));
+  localStorage.setItem('officerRank', rank);
+}
+
+function showOfficerDisplay(name, serial, rank) {
+  displayOfficerName.textContent = name;
+  displaySerialNumber.textContent = serial;
+  displayOfficerRank.textContent = rank;
+  officerForm.style.display = 'none';
+  officerDisplay.style.display = 'block';
+  saveButton.textContent = 'Edit';
+}
+
+function showOfficerForm() {
+  officerForm.style.display = 'block';
+  officerDisplay.style.display = 'none';
+  saveButton.textContent = 'Save';
+}
+
+const storedName = localStorage.getItem('officerName');
+const storedSerial = localStorage.getItem('serialNo');
+const storedRank = localStorage.getItem('officerRank');
+
+if (storedName && storedSerial) {
+  officerNameInput.value = storedName;
+  serialNumberInput.value = storedSerial;
+  officerRankSelect.value = storedRank;
+  showOfficerDisplay(storedName, storedSerial, storedRank);
+} else {
+  showOfficerForm();
+}
+
+saveButton.addEventListener('click', () => {
+  if (saveButton.textContent === 'Save') {
+    const name = officerNameInput.value.trim();
+    const serial = serialNumberInput.value.trim();
+    const rank = officerRankSelect.value;
+
+    if (name && serial && rank) {
+      saveOfficerData(name, serial, rank);
+      showOfficerDisplay(name, serial, rank);
+    }
+  } else {
+    showOfficerForm();
+    officerNameInput.value = localStorage.getItem('officerName') || '';
+    serialNumberInput.value = localStorage.getItem('serialNo') || '';
+    officerRankSelect.value = localStorage.getItem('officerRank') || '';
+  }
+});

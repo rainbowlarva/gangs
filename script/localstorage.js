@@ -1,22 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const fields = [
-    { id: 'employeeName', key: 'employeeName' },
-    { id: 'departmentRank', key: 'departmentRank' },
-    { id: 'employeeRank', key: 'employeeRank' },
-    { id: 'officerName', key: 'officerName' },
-    { id: 'serialNo', key: 'serialNo' },
-    { id: 'officerRank', key: 'officerRank' },
-    { id: 'officerBadge', key: 'officerBadge' }
+  const fieldMappings = [
+    {
+      ids: ['officerName', 'employeeName'],
+      keys: ['officerName', 'employeeName']
+    },
+    {
+      ids: ['serialNumber', 'serialNo', 'officerBadge'],
+      keys: ['serialNo', 'officerBadge']
+    },
+    {
+      ids: ['officerRank'],
+      keys: ['officerRank']
+    }
   ];
 
-  fields.forEach(({ id, key }) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+  fieldMappings.forEach(({ ids, keys }) => {
+    const primaryId = ids[0];
+    const input = document.getElementById(primaryId);
+    if (!input) return;
 
-    el.value = localStorage.getItem(key) || '';
+    // Set the field value from the first available key
+    for (let key of keys) {
+      const value = localStorage.getItem(key);
+      if (value) {
+        input.value = value;
+        break;
+      }
+    }
 
-    el.addEventListener('input', () => {
-      localStorage.setItem(key, el.value.trim());
+    // Update all related keys on input
+    input.addEventListener('input', () => {
+      const val = input.value.trim();
+      keys.forEach(key => localStorage.setItem(key, val));
     });
   });
 });

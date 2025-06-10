@@ -54,8 +54,8 @@ function generateBBCode(e) {
   const spoilerTitle  = document.getElementById('spoilerTitle').value.trim() || 'N/A';
   const timeDate      = document.getElementById('timeDate').value.trim()     || 'N/A';
   const location      = document.getElementById('location').value.trim()     || 'N/A';
-  const employeeName  = document.getElementById('employeeName').value.trim() || 'N/A';
-  const employeeRank  = document.getElementById('employeeRank').value.trim() || 'N/A';
+  const officerName  = document.getElementById('officerName').value.trim() || 'N/A';
+  const officerRank  = document.getElementById('officerRank').value.trim() || 'N/A';
   const narrative     = document.getElementById('narrative').value.trim()    || 'N/A';
   const attachments   = document.getElementById('attachments').value.trim()  || 'N/A';
   const employeeSig   = document.getElementById('employeeSig').value.trim()  || 'N/A';
@@ -83,7 +83,7 @@ function generateBBCode(e) {
 
   finalText = finalText.replace(
     '[b]EMPLOYEE FULL NAME:[/b] \n[b]DEPARTMENTAL RANK:[/b] \n',
-    `[b]EMPLOYEE FULL NAME:[/b] ${employeeName}\n[b]DEPARTMENTAL RANK:[/b] ${employeeRank}\n`
+    `[b]EMPLOYEE FULL NAME:[/b] ${officerName}\n[b]DEPARTMENTAL RANK:[/b] ${officerRank}\n`
   );
 
   finalText = finalText.replace('\nNAMEHERE\n\n', `\n${narrative}\n\n`);

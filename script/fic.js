@@ -75,7 +75,7 @@ function generateBBCode(event) {
   const dateTime    = document.getElementById('dateTime').value.trim()    || 'N/A';
   const location    = document.getElementById('location').value.trim()    || 'N/A';
   const officerName = document.getElementById('officerName').value.trim() || 'N/A';
-  const serialNo    = document.getElementById('serialNo').value.trim()    || 'N/A';
+  const serialNumber    = document.getElementById('serialNumber').value.trim()    || 'N/A';
   const subjectName = document.getElementById('subjectName').value.trim() || 'N/A';
 
   const gangLine    = getGangMemberBBCode();
@@ -91,7 +91,7 @@ function generateBBCode(event) {
   finalText = finalText.replace('[b]DATE/TIME[/b]: NAMEHERE', `[b]DATE/TIME[/b]: ${dateTime}`);
   finalText = finalText.replace('[b]LOCATION[/b]: NAMEHERE', `[b]LOCATION[/b]: ${location}`);
   finalText = finalText.replace('[b]OFFICER NAME[/b]: NAMEHERE', `[b]OFFICER NAME:[/b] ${officerName}`);
-  finalText = finalText.replace('[b]SERIAL #[/b]: NAMEHERE', `[b]SERIAL #[/b]: ${serialNo}`);
+  finalText = finalText.replace('[b]SERIAL #[/b]: NAMEHERE', `[b]SERIAL #[/b]: ${serialNumber}`);
   finalText = finalText.replace('[b]SUBJECT NAME[/b]: NAMEHERE', `[b]SUBJECT NAME:[/b] ${subjectName}`);
 
   finalText = finalText.replace('[cb] [b]§ 305 GANG MEMBER[/b]', gangLine);

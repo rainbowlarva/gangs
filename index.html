@@ -17,6 +17,37 @@
 
     <div class="sidebar-text">
       <p>Detectives Bureau</p>
+          <div class="utc-time-container">
+  <p><span id="utcTime"></span></p>
+    </div>
+<div id="nameAndSerial">
+  <div id="officerDisplay" style="display: none;">
+    <p><strong>Name:</strong> <span id="displayOfficerName"></span></p>
+    <p><strong>Serial:</strong> <span id="displaySerialNumber"></span></p>
+    <p><strong>Rank:</strong> <span id="displayOfficerRank"></span></p>
+  </div>
+
+<div id="officerForm">
+  <input id="officerName" placeholder="Officer Name" required type="text" />
+  <input id="serialNumber" placeholder="Serial Number" required type="text" />
+  <select id="officerRank" required>
+    <option value="" disabled selected>Select Rank</option>
+    <option>Police Officer II</option>
+    <option>Police Officer III</option>
+    <option>Police Officer III+1</option>
+    <option>Police Officer III+1 (SGO)</option>
+    <option>Sergeant I</option>
+    <option>Sergeant II</option>
+    <option>Lieutenant I</option>
+    <option>Lieutenant II</option>
+    <option>Captain I</option>
+    <option>Captain II</option>
+    <option>Captain III</option>
+  </select>
+</div>
+
+  <button id="saveOfficerInfo">Save</button>
+</div>
     </div>
 
     <div class="dropdown">
@@ -78,7 +109,8 @@
   <div class="updates-section">
   <h2 class="updates-title">Updates</h2>
   <ul class="updates-list">
-    <li><strong>02/JUNE/2025:</strong> Add this update section.</li>
+    <li><strong>10/JUN/2025:</strong> Added the clock, and new officer information fields.</li>
+    <li><strong>02/JUNE/2025:</strong> Added this update section.</li>
     <li><strong>01/JUNE/2025:</strong> Added a criteria tooltip to the SanGang form.</li>
     <li><strong>01/JUNE/2025:</strong> Added <a href="https://rainbowlarva.github.io/Gang-Enforcement-Map/" target="_blank">Gang Enforcement Map</a> and the associated <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5eOCAFlZ9d78QJHiOY0BdtQuNRKjLtep1OZEVHI1k0_sTRw/viewform" target="_blank">Submission Form</a></li>
     <li><strong>30/MAY/2025:</strong> Added the <a href="https://rainbowlarva.github.io/gangs/sangang.html">SanGang generator</a>.</li>
