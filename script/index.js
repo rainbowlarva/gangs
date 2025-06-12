@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   latestMapLink.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-      const images = await fetchAlbumImages('uQyYFzW');
+      const images = await fetchAlbumImages('rCsvUxU');
       if (images.length > 0) {
         const lastImage = images[images.length - 1];
         showModal(lastImage.link, true); // Panzoom ENABLED
