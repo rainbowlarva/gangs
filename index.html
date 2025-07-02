@@ -1,139 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>GIT Generators</title>
-  <a href="admin.html" style="display: none;">Admin Page</a>
-  <link rel="stylesheet" href="styles/index.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Centered Link</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    a {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #0000EE;
+      text-decoration: underline;
+    }
+    a:hover {
+      color: #551A8B;
+    }
+  </style>
 </head>
-
-<body class="background">
-  <a href="admin.html" class="hidden-link">Admin Page</a>
-  <div class="sidebar">
-    <img src="images/logos/detective.png" alt="Sidebar Placeholder" class="sidebar-image">
-
-    <div class="sidebar-text">
-      <p>Detectives Bureau</p>
-          <div class="utc-time-container">
-  <p><span id="utcTime"></span></p>
-    </div>
-<div id="nameAndSerial">
-  <div id="officerDisplay" style="display: none;">
-    <p><strong>Name:</strong> <span id="displayOfficerName"></span></p>
-    <p><strong>Serial:</strong> <span id="displaySerialNumber"></span></p>
-    <p><strong>Rank:</strong> <span id="displayOfficerRank"></span></p>
-  </div>
-
-<div id="officerForm">
-  <input id="officerName" placeholder="Officer Name" required type="text" />
-  <input id="serialNumber" placeholder="Serial Number" required type="text" />
-  <select id="officerRank" required>
-    <option value="" disabled selected>Select Rank</option>
-    <option>Police Officer II</option>
-    <option>Police Officer III</option>
-    <option>Police Officer III+1</option>
-    <option>Police Officer III+1 (SGO)</option>
-    <option>Detective I</option>
-    <option>Detective II</option>
-    <option>Detective III</option>
-    <option>Sergeant I</option>
-    <option>Sergeant II</option>
-    <option>Lieutenant I</option>
-    <option>Lieutenant II</option>
-    <option>Captain I</option>
-    <option>Captain II</option>
-    <option>Captain III</option>
-  </select>
-</div>
-
-  <button id="saveOfficerInfo">Save</button>
-</div>
-    </div>
-
-    <div class="dropdown">
-      <button class="dropdown-btn">Useful Resources</button>
-      <div class="dropdown-content">
-        <a href="https://mdc.gta.world/" target="_blank">Mobile Data Computer</a>
-        <a href="https://forum.gta.world/en/topic/78852-san-andreas-penal-code/" target="_blank">Penal Code</a>
-        <a href="https://forum.gta.world/en/topic/71740-san-andreas-legislation-index/" target="_blank">Legislation Index</a>
-        <a href="https://productofmymind.github.io/GTAW-CCTVs/" target="_blank">CCTV Map</a>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button class="dropdown-btn">Maps</button>
-      <div class="dropdown-content">
-        <a href="https://rainbowlarva.github.io/Gang-Enforcement-Map/" target="_blank">Gang Enforcement Map</a>
-        <a href="https://intelmap.onrender.com/" target="_blank">Narcotics Map</a>
-        <a href="#" id="latestMap">Gangs of Los Santos</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="google-banner">
-    <div id="googleHeader">!! INJUNCTION !! ▼</div>
-  </div>
-  <div id="googleDropdown" class="google-dropdown-banner"></div>
-
-  <img src="images/logos/git.png" class="gitlogo" />
-
-  <div class="prdcontainer">
-    <h1>GANG IMPACT TEAM</h1>
-    <div class="git-container">
-      <a href="poi.html" class="image-button">
-        <img src="images/thumbnails/person-of-interest.png" alt="poi">
-        <p>Person of Interest</p>
-      </a>
-      <a href="property.html" class="image-button">
-        <img src="images/thumbnails/property-of-interest.png" alt="poi2">
-        <p>Property of Interest</p>
-      </a>
-      <a href="fic.html" class="image-button">
-        <img src="images/thumbnails/field-interview-card.png" alt="fic">
-        <p>Field Interview Card</p>
-      </a>
-      <a href="west-valley.html" class="image-button">
-        <img src="images/thumbnails/ged-wva-ir.png" alt="wva">
-        <p>West Valley Area Incident Report</p>
-      </a>
-      <a href="south-central.html" class="image-button">
-        <img src="images/thumbnails/ged-sca-ir.png" alt="scr">
-        <p>South Central Area Incident Report</p>
-      </a>
-      <a href="sangang.html" class="image-button">
-        <img src="images/thumbnails/sangang.png" alt="scr">
-        <p>SanGang</p>
-      </a>
-      <a href="3man.html" class="image-button">
-        <img src="images/thumbnails/3man.png" alt="scr">
-        <p>3-Man Patrol Report</p>
-      </a>
-    </div>
-  </div>
-
-  <div class="updates-section">
-  <h2 class="updates-title">Updates</h2>
-  <ul class="updates-list">
-    <li><strong>10/JUN/2025:</strong> Added the clock, and new officer information fields.</li>
-    <li><strong>02/JUNE/2025:</strong> Added this update section.</li>
-    <li><strong>01/JUNE/2025:</strong> Added a criteria tooltip to the SanGang form.</li>
-    <li><strong>01/JUNE/2025:</strong> Added <a href="https://rainbowlarva.github.io/Gang-Enforcement-Map/" target="_blank">Gang Enforcement Map</a> and the associated <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5eOCAFlZ9d78QJHiOY0BdtQuNRKjLtep1OZEVHI1k0_sTRw/viewform" target="_blank">Submission Form</a></li>
-    <li><strong>30/MAY/2025:</strong> Added the <a href="https://rainbowlarva.github.io/gangs/sangang.html">SanGang generator</a>.</li>
-    <li><strong>05/MAR/2025:</strong> Created this page.</li>
-  </ul>
-</div>
-
-  <div id="modalOverlay" class="modal-overlay">
-<div class="modal-content">
-  <div class="modal-image-interactive" style="width:100%;height:100%;">
-    <img id="modalImage" src="" alt="Modal Image">
-  </div>
-</div>
-
-  <script src="script/panzoom.min.js"></script>
-  <script src="script/index.js"></script>
+<body>
+  <a href="https://bigfrog.space/gangs/">
+    https://bigfrog.space/gangs/
+  </a>
 </body>
 </html>
